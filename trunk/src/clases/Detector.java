@@ -61,7 +61,7 @@ public class Detector {
 						if(j%21==0){
 							
 							value =  imgFinal.getRGB(i,j);
-							rgbs = color.obtieneRGB(value);
+							rgbs = Colores.obtieneRGB(value);
 							Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
 							colorpixel = color.decideColor(hsb[0], hsb[1], hsb[2]);
 							contador[colorpixel]++;

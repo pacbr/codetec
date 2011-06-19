@@ -30,6 +30,6 @@ public class Grafico extends JFrame{
 				System.exit(0);
 			}
 		});
-	}//FIN DEL MAIN
+	}
 	
-}//FIN DE NUESTRA CLASE
+}
