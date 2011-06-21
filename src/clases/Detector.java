@@ -89,7 +89,39 @@ public class Detector {
 				JLabel etiqueta1 = new JLabel(imagenmuestra1);
 				g = new Grafico(etiqueta1);
 				g.show();
-	
+
+				
+				
+				
+				Segmentacion seg = new Segmentacion(w,h);
+				BufferedImage imgb;
+				BufferedImage imgb2;
+				BufferedImage imgb3;
+				imgb = seg.Binarizacion(imagen,20);//34 es el máximo
+				imgb2 = seg.Bordes(imgb);
+				imgb3 = seg.escalaDeGrises(imagen);
+//				int []vector = seg.ObtenerVector(imgb);
+//				int []vector2 = seg.QuickSort(vector,0,226599);
+//				imgb = seg.recuadraImagen(imgb);
+				
+				
+		    	ImageIcon imagenmuestra2 = new ImageIcon(imgb);
+				JLabel etiqueta2 = new JLabel(imagenmuestra2);
+				g = new Grafico(etiqueta2);
+				g.show();
+				
+				
+		    	ImageIcon imagenmuestra3 = new ImageIcon(imgb2);
+				JLabel etiqueta3 = new JLabel(imagenmuestra3);
+				g = new Grafico(etiqueta3);
+				g.show();
+				
+				
+		    	ImageIcon imagenmuestra4 = new ImageIcon(imgb3);
+				JLabel etiqueta4 = new JLabel(imagenmuestra4);
+				g = new Grafico(etiqueta4);
+				g.show();
+				
 			
 		} catch (IOException e) {
 			e.printStackTrace();
