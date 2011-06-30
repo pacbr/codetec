@@ -8,40 +8,58 @@ public class Aclarador{
 		
 		int w = imagen.getWidth();
 		int h = imagen.getHeight(null);
-		int min = Math.min(h, w);
-		int dif = (Math.abs(h-w))/2;
-		if (dif%2!=0)dif++;
-		BufferedImage imgf=new BufferedImage(min+1, min+1, BufferedImage.TYPE_INT_RGB);
+		
+		BufferedImage imgf=new BufferedImage(w,h, BufferedImage.TYPE_INT_RGB);
 		int valorRGB;
 		int valoresRGB[] = new int[3];
 		float valoresHSB[] = new float[3];
-		
-		
-		for(int r=0;r<min;r++){
+		Colores col = new Colores();
+		for(int r=0;r<w;r++){
 			
-			for(int c=0;c<min;c++){
-				valorRGB = imagen.getRGB((r+dif),c);
-				valoresRGB = Colores.obtieneRGB(valorRGB);
-				Color.RGBtoHSB(valoresRGB[0], valoresRGB[1], valoresRGB[2], valoresHSB);
-				valoresHSB[1] = valoresHSB[1] - (float) (0.1);
-				valoresHSB[2] = valoresHSB[2] + (float) (0.2);
+			for(int c=0;c<h;c++){
+				valorRGB = imagen.getRGB(r,c);
 				
-				if (valoresHSB[2]>1){
-					valoresHSB[2]=1;
-				}
-				if (valoresHSB[1]<0){
-					valoresHSB[1]=0;
-				}
-								
-				if ((valoresHSB[1]>0.4)){
-					valoresHSB[1]=(float) 1.0;
-					valoresHSB[2]=(float) 1.0;
+//				System.out.println(r+","+c);
+				if(col.obtieneColor(imagen.getRGB(r,c))!=10){
+//					if(r==41 && c==190){
+//						System.out.println("El color es: "+Colores.decideColor(valoresRGB[0], valoresRGB[1], valoresRGB[2]));
+//						int ii=41;
+//						int jj=190;
+//						Colores col = new Colores();
+//						System.out.println(col.coloresMap.get(Colores.obtieneColor(imagen.getRGB(ii, jj))));
+//						System.out.println(imagen.getWidth());
+//						System.out.println(imagen.getHeight());
+//						for(int i=ii;i<ii+40;i++){
+//							for(int j=jj;j<(jj+40);j++){
+//								imagen.setRGB(i, j, 0x000000);
+//							}
+//						}
+//					
+//					}
+					valoresRGB = Colores.obtieneRGB(valorRGB);
+					Color.RGBtoHSB(valoresRGB[0], valoresRGB[1], valoresRGB[2], valoresHSB);
 					
+					valoresHSB[1] = valoresHSB[1] - (float) (0.1);
+					valoresHSB[2] = valoresHSB[2] + (float) (0.2);
+					
+					if (valoresHSB[2]>1){
+						valoresHSB[2]=1;
+					}
+					if (valoresHSB[1]<0){
+						valoresHSB[1]=0;
+					}
+									
+					if ((valoresHSB[1]>0.4)){
+						valoresHSB[1]=(float) 1.0;
+						valoresHSB[2]=(float) 1.0;
+						
+					}
+					
+					valorRGB = Color.HSBtoRGB(valoresHSB[0], valoresHSB[1], valoresHSB[2]);
+					imgf.setRGB(r, c, valorRGB);
+				}else{
+					imgf.setRGB(r, c, 0x000000);
 				}
-				
-				valorRGB = Color.HSBtoRGB(valoresHSB[0], valoresHSB[1], valoresHSB[2]);
-				imgf.setRGB(r, c, valorRGB);
-				
 			}
 						
 		}
