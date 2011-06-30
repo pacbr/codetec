@@ -7,10 +7,9 @@ public class Grafico extends JFrame{
 	public Grafico(JLabel et){
 		super("Muestra de Imagen en JAVA...");
 		
-		//AGREGAMOS LA ETIQUETA QUE CONTIENE LA IMAGEN AL FRAME
+		//Agrego etiqueta que contiene la imagen al frame
 		getContentPane().add(et);
 		
-		//ESTABLECEMOS EL TAMAÑO DEL FRAME
 		this.setSize(500, 500);
 		
 	}
@@ -22,7 +21,7 @@ public class Grafico extends JFrame{
 		Grafico p = new Grafico(etiqueta);
 		p.show();
 		
-		//COLOCAMOS EL CODIGO QUE PERMITE CERRAR LA VENTANA
+		//Permite cerrar la ventana
 		p.addWindowListener(new WindowAdapter()
 		{
 			public void windowClosing(WindowEvent evt)
