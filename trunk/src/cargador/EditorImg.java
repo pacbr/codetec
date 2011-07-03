@@ -17,9 +17,12 @@ public class EditorImg extends JFrame{
 //		}
 
 		EditorImg editor = new EditorImg();
-		editor.setBounds(120, 120, 800, 600);
+		
+		editor.setSize(1200, 700);
+		editor.setLocationRelativeTo(null);
+		editor.setBounds(10, 10, 1340, 740);
 		editor.setVisible(true);
-		editor.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		editor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		editor.addWindowListener(new WindowAdapter(){
 			public void WindowCloser(WindowEvent e){        
 				System.exit(0);
