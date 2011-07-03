@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Detector {
@@ -22,7 +23,11 @@ public class Detector {
 	int pixelesAnalizados;
 	int ganador;
 	Sonido s;
+	BufferedImage imagenCuantizada2;
 	
+	public BufferedImage getImagenCuantizada(){
+		return imagenCuantizada2;
+	}
 	public JLabel ejecuta(String ruta){
 		 
 		// Variables locales
@@ -75,8 +80,8 @@ public class Detector {
 			
 			imgAclarada = aclarador.aclara(imgErosion);
 		
-			imgSegmentacion = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
-			Map<Integer,List<Pixel>> mapa = Segmentacion.segmentaFinal(imgAclarada, imgSegmentacion);
+			imagenCuantizada2 = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
+			Map<Integer,List<Pixel>> mapa = Segmentacion.segmentaFinal(imgAclarada, imagenCuantizada2);
 			
 //			ImageIcon imagenmuestra1 = new ImageIcon(img);
 //			JLabel etiqueta1 = new JLabel(imagenmuestra1);
@@ -85,21 +90,21 @@ public class Detector {
 				
 			
 			
-			
-			ImageIcon imagenmuestra2 = new ImageIcon(imgErosion);
-			JLabel etiqueta2 = new JLabel(imagenmuestra2);
-			g2 = new Grafico(etiqueta2, "Erosion");
-			g2.show();
-			
-			ImageIcon imagenmuestra1 = new ImageIcon(imgAclarada);
-			JLabel etiqueta1 = new JLabel(imagenmuestra1);
-			g = new Grafico(etiqueta1, "Aclarado");
-			g.show();
-			
-			ImageIcon imagenmuestra3 = new ImageIcon(imgSegmentacion);
-			JLabel etiqueta3 = new JLabel(imagenmuestra3);
-			g3 = new Grafico(etiqueta3, "Segmentacion");
-			g3.show();
+//			
+//			ImageIcon imagenmuestra2 = new ImageIcon(imgErosion);
+//			JLabel etiqueta2 = new JLabel(imagenmuestra2);
+//			g2 = new Grafico(etiqueta2, "Erosion");
+//			g2.show();
+//			
+//			ImageIcon imagenmuestra1 = new ImageIcon(imgAclarada);
+//			JLabel etiqueta1 = new JLabel(imagenmuestra1);
+//			g = new Grafico(etiqueta1, "Aclarado");
+//			g.show();
+//			
+//			ImageIcon imagenmuestra3 = new ImageIcon(imagenCuantizada);
+//			JLabel etiqueta3 = new JLabel(imagenmuestra3);
+//			g3 = new Grafico(etiqueta3, "Segmentacion");
+//			g3.show();
 			
 			int wAclarada = imgAclarada.getWidth();
 			int hAclarada = imgAclarada.getHeight(null);
@@ -134,7 +139,16 @@ public class Detector {
 			s = new Sonido(colorpixel);
 
 		    	
-
+			/////
+			
+//			DetectorPixeles test = new DetectorPixeles();
+//	        JFrame f = new JFrame("Imagen");
+////	        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//	        f.add(test.getContent());
+//	        f.pack();
+//	        f.setLocationRelativeTo(null);
+//	        f.setVisible(true);
+			////
 				
 				
 				

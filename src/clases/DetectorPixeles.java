@@ -26,15 +26,16 @@ public class DetectorPixeles extends JFrame{
     CardLayout esqueInf = new CardLayout();
     JPanel panelColor;
     JPanel panelVacio = new JPanel();
-    public DetectorPixeles(){
+    public DetectorPixeles(BufferedImage imagenCuantizada){
     	panelBajo.setLayout(esqueInf);
+    	image = imagenCuantizada;
     }
 	
 //    public void setImage(BufferedImage image) {
 //        right.setIcon(new ImageIcon(image));
 //    }
 
-	private JPanel getContent() {
+	public JPanel getContent() {
 		left = getLeft();
 		right = getRight();
 		new PointSelector(this);
@@ -88,23 +89,24 @@ public class DetectorPixeles extends JFrame{
     
     
 	private JLabel getLeft() {
-		try {
-			image = ImageIO.read( new File ("D:/Musica/Paco/imagenesCodetec/img2.jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			image = ImageIO.read( new File ("D:/Musica/Paco/imagenesCodetec/img2.jpg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return new JLabel(new ImageIcon(image), JLabel.CENTER);
 		return new JLabel(new ImageIcon(image), JLabel.CENTER);
 	}
 
-	public static void main(String[] args) {
-        DetectorPixeles test = new DetectorPixeles();
-        JFrame f = new JFrame("Imagen");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(test.getContent());
-        f.pack();
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
-    }
+//	public static void main(String[] args) {
+//        DetectorPixeles test = new DetectorPixeles(new BufferedImage());
+//        JFrame f = new JFrame("Imagen");
+//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        f.add(test.getContent());
+//        f.pack();
+//        f.setLocationRelativeTo(null);
+//        f.setVisible(true);
+//    }
 }
 
 class PointSelector extends MouseAdapter{
