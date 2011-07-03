@@ -36,35 +36,36 @@ import javax.swing.event.ChangeListener;
   menuArchivo = new JMenu("Archivo");
 //  menuDetecta = new JMenu("Detecta1");
   abrir = menuArchivo.add("Abrir");
-
   guardar = menuArchivo.add("Guardar");
   guardar.setEnabled(false);
   menuArchivo.addSeparator();
   salir = menuArchivo.add("Salir");   
- 
+  barraMenu.add(menuArchivo);
+  
+  
 //  detecta1 = menuDetecta.add("Detecta1");
   detecta = menuArchivo.add("Detecta");
 //  detecta1.setEnabled(false);
   detecta.setEnabled(false);
-  barraMenu.add(menuArchivo);
 //  barraMenu.add(menuDetecta); 
   barraMenu.add(detecta); //PARA AGREGAR JMENUITEM HAY QUE TOCAR TB EN LAS CLASES EDITORIMG y CONTROLADOR
+  
   
   detectaMedia = menuArchivo.add("Media");
 //detecta1.setEnabled(false);
 detectaMedia.setEnabled(false);
-barraMenu.add(menuArchivo);
 //barraMenu.add(menuDetecta); 
 barraMenu.add(detectaMedia);
+
 
 detectaMediana = menuArchivo.add("Mediana");
 //detecta1.setEnabled(false);
 detectaMediana.setEnabled(false);
-barraMenu.add(menuArchivo);
 //barraMenu.add(menuDetecta); 
 barraMenu.add(detectaMediana);
   
   
+
   this.add("North",barraMenu);  //Agregamos la barra de menu
   creapanelCentral();     //Creamos el panel en el que se mostrara la imagen seleccionada
   creapanelBajo();     //Creamos el panel en el que se mostraran los controles para manipular la imagen  
