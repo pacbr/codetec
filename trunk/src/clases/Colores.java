@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Colores {
-	Map<Integer, String> coloresMap = new HashMap<Integer,String>();
+	private Map<Integer, String> coloresMap = new HashMap<Integer,String>();
 	public Colores(){
 		coloresMap.put(0, "Rojo");
 		coloresMap.put(1, "Naranja");
@@ -21,7 +21,7 @@ public class Colores {
 		coloresMap.put(11, "Blanco");
 	}
 	
-	public static int colorAHexadecimal(Integer color){
+	public int colorAHexadecimal(Integer color){
 		Integer valor = null;
 		if(color == 0){
 			valor = 0xFF0000;
@@ -139,7 +139,7 @@ public class Colores {
 		return valor;
 	}
 	
-	public  Integer obtieneColor(Integer valor){
+	public Integer obtieneColor(Integer valor){
 		int rgbs[] = new int[3];;
 		float hsb[] = new float[3];
 		Integer colorpixel = null;
@@ -147,5 +147,8 @@ public class Colores {
 		Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
 		colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
 		return colorpixel;
+	}
+	public Map<Integer, String> getColoresMap(){
+		return coloresMap;
 	}
 }

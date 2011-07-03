@@ -10,10 +10,10 @@ import javax.swing.event.ChangeListener;
  static final long serialVersionUID = 10000;
  String nombreArchivo, ruta;
  JMenuBar barraMenu;
- JMenu menuArchivo, menuDetecta;
- JMenuItem abrir, abrir2, guardar, salir, detecta1, detecta;
+ JMenu menuArchivo, menuDetecta, menuDetectaMedia,menuDetectaMediana;
+ JMenuItem abrir, abrir2, guardar, salir, detecta1, detecta, detectaMedia, detectaMediana;
  JScrollPane panelDespl;
- JPanel panelBajo, panelDetecta,  panelColor, panelVacio;
+ JPanel panelBajo, panelDetecta, panelColor, panelVacio;
  int altura = 80;
  Image imagen;
  Image imgAux;
@@ -49,6 +49,22 @@ import javax.swing.event.ChangeListener;
   barraMenu.add(menuArchivo);
 //  barraMenu.add(menuDetecta); 
   barraMenu.add(detecta); //PARA AGREGAR JMENUITEM HAY QUE TOCAR TB EN LAS CLASES EDITORIMG y CONTROLADOR
+  
+  detectaMedia = menuArchivo.add("Media");
+//detecta1.setEnabled(false);
+detectaMedia.setEnabled(false);
+barraMenu.add(menuArchivo);
+//barraMenu.add(menuDetecta); 
+barraMenu.add(detectaMedia);
+
+detectaMediana = menuArchivo.add("Mediana");
+//detecta1.setEnabled(false);
+detectaMediana.setEnabled(false);
+barraMenu.add(menuArchivo);
+//barraMenu.add(menuDetecta); 
+barraMenu.add(detectaMediana);
+  
+  
   this.add("North",barraMenu);  //Agregamos la barra de menu
   creapanelCentral();     //Creamos el panel en el que se mostrara la imagen seleccionada
   creapanelBajo();     //Creamos el panel en el que se mostraran los controles para manipular la imagen  

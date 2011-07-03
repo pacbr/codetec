@@ -176,7 +176,7 @@ public class Segmentacion {
 					list.add(p);
 					mapa.put(colorpixel, list);
 				}
-				img2.setRGB(i, j, Colores.colorAHexadecimal(colorpixel));
+				img2.setRGB(i, j, new Colores().colorAHexadecimal(colorpixel));
 			}
 		}
 		return mapa;
