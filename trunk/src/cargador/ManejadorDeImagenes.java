@@ -1,13 +1,19 @@
 package cargador;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import clases.Detector;
 import clases.DetectorMedia;
 import clases.DetectorMediana;
+import clases.DetectorPixeles;
+import clases.Grafico;
 /*@Desc Clase del nivel de la capa de negocios. Implementa las operaciones que son llamadas desde el Controlador de la aplicación
  * para poder cargar las imagenes, alamacenarlas y modificaralas, apoyandose en un objeto la clase de más bajo nivel, es decir ProcesadorDeImagenes 
  */
@@ -79,8 +85,22 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
  ////////////////////
  
  public JLabel detectaColor(Detector detector){
+	 BufferedImage imagenCuantizada;
+	 JLabel jl = detector.ejecuta(ruta);
+	 imagenCuantizada=detector.getImagenCuantizada();
+	
 	 
-	 return detector.ejecuta(ruta);
+	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada);
+     JFrame f = new JFrame("Imagen");
+     
+//     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     JPanel nuevoJPanel = detPix.getContent();
+     f.add(nuevoJPanel);
+     f.pack();
+     f.setLocationRelativeTo(null);
+     f.setVisible(true);
+	 
+	 return jl;
 	 
 //	 c.imprimeConfirmacion();
  }
