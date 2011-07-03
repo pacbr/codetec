@@ -24,10 +24,21 @@ public class Detector {
 	int ganador;
 	Sonido s;
 	BufferedImage imagenCuantizada2;
+	int contador[];
 	
 	public BufferedImage getImagenCuantizada(){
 		return imagenCuantizada2;
 	}
+	
+	public int[] getContadorPixeles(){
+		return contador;
+	}
+	
+	public int getPixelesAnalizados(){
+		return pixelesAnalizados;
+	}
+	
+	
 	public JLabel ejecuta(String ruta){
 		 
 		// Variables locales
@@ -62,7 +73,7 @@ public class Detector {
 			color = new Colores();
 			
 			
-			int contador[] = new int[14];
+			contador = new int[14];
 
 			for(int i=0;i<=13;i++){
 				contador[i] = 0;

@@ -2,6 +2,7 @@ package cargador;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -9,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import clases.Colores;
 import clases.Detector;
 import clases.DetectorMedia;
 import clases.DetectorMediana;
@@ -88,7 +91,13 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 BufferedImage imagenCuantizada;
 	 JLabel jl = detector.ejecuta(ruta);
 	 imagenCuantizada=detector.getImagenCuantizada();
-	
+	 int contador[]=detector.getContadorPixeles();
+	 int pixelesAnalizados = detector.getPixelesAnalizados();
+	 Map<Integer,String> map = new Colores().getColoresMap();
+	 
+	 for(int i=0;i<contador.length;i++){
+		 System.out.println(map.get(i)+": "+(float)(100*contador[i])/pixelesAnalizados+"%");
+	 }
 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada);
      JFrame f = new JFrame("Imagen");

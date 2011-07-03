@@ -11,7 +11,7 @@ import javax.swing.event.ChangeListener;
  String nombreArchivo, ruta;
  JMenuBar barraMenu;
  JMenu menuArchivo, menuDetecta, menuDetectaMedia,menuDetectaMediana;
- JMenuItem abrir, abrir2, guardar, salir, detecta1, detecta, detectaMedia, detectaMediana;
+ JMenuItem abrir, abrir2, guardar, salir, detecta1, detecta, detectaMedia, detectaMediana, ayuda;
  JScrollPane panelDespl;
  JPanel panelBajo, panelDetecta, panelColor, panelVacio;
  int altura = 80;
@@ -52,18 +52,17 @@ import javax.swing.event.ChangeListener;
   
   
   detectaMedia = menuArchivo.add("Media");
-//detecta1.setEnabled(false);
 detectaMedia.setEnabled(false);
-//barraMenu.add(menuDetecta); 
 barraMenu.add(detectaMedia);
 
 
 detectaMediana = menuArchivo.add("Mediana");
-//detecta1.setEnabled(false);
 detectaMediana.setEnabled(false);
-//barraMenu.add(menuDetecta); 
 barraMenu.add(detectaMediana);
   
+
+ayuda = menuArchivo.add("Ayuda");
+barraMenu.add(ayuda);
   
 
   this.add("North",barraMenu);  //Agregamos la barra de menu
