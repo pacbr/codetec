@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import clases.Detector;
+import clases.DetectorMedia;
+import clases.DetectorMediana;
 /*@Desc Clase del nivel de la capa de negocios. Implementa las operaciones que son llamadas desde el Controlador de la aplicación
  * para poder cargar las imagenes, alamacenarlas y modificaralas, apoyandose en un objeto la clase de más bajo nivel, es decir ProcesadorDeImagenes 
  */
@@ -79,6 +81,20 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
  public JLabel detectaColor(Detector detector){
 	 
 	 return detector.ejecuta(ruta);
+	 
+//	 c.imprimeConfirmacion();
+ }
+ 
+ public JLabel detectaColorMedia(DetectorMedia detectorMedia){
+	 
+	 return detectorMedia.ejecuta(ruta);
+	 
+//	 c.imprimeConfirmacion();
+ }
+ 
+ public JLabel detectaColorMediana(DetectorMediana detectorMediana){
+	 
+	 return detectorMediana.ejecuta(ruta);
 	 
 //	 c.imprimeConfirmacion();
  }

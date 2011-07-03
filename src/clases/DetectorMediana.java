@@ -11,11 +11,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Detector {
-	static 
-	{ 
-	      System.setProperty("com.sun.media.jai.disableMediaLib", "true"); 
-	} 
+public class DetectorMediana {
+	
 	int rgbs[];
 	float hsb[];
 	Integer colorpixel = null;
@@ -28,7 +25,7 @@ public class Detector {
 		// Variables locales
 		BufferedImage img;
 		BufferedImage imgAclarada;
-		BufferedImage imgErosion;
+		BufferedImage imgMediana;
 		BufferedImage imgSegmentacion;
 		Grafico g;
 		Grafico g1;
@@ -67,71 +64,61 @@ public class Detector {
 			
 			
 			
-//			img=seg.escalaDeGrises(img);
-//			imgFinal = seg.filtroMedia(img);
+
+			imgMediana = seg.filtroMediana(img);
 			
-			imgErosion = fil.erode(img); 
-//			imgErosion = fil.dilate(imgErosion); 
-			
-			imgAclarada = aclarador.aclara(imgErosion);
+			imgAclarada = aclarador.aclara(imgMediana);
 		
 			imgSegmentacion = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
 			Map<Integer,List<Pixel>> mapa = Segmentacion.segmentaFinal(imgAclarada, imgSegmentacion);
 			
-//			ImageIcon imagenmuestra1 = new ImageIcon(img);
-//			JLabel etiqueta1 = new JLabel(imagenmuestra1);
-//			g1 = new Grafico(etiqueta1);
-//			g1.show();
-				
-			
-			
-			
-			ImageIcon imagenmuestra2 = new ImageIcon(imgErosion);
-			JLabel etiqueta2 = new JLabel(imagenmuestra2);
-			g2 = new Grafico(etiqueta2, "Erosion");
-			g2.show();
-			
-			ImageIcon imagenmuestra1 = new ImageIcon(imgAclarada);
+			ImageIcon imagenmuestra1 = new ImageIcon(imgMediana);
 			JLabel etiqueta1 = new JLabel(imagenmuestra1);
-			g = new Grafico(etiqueta1, "Aclarado");
-			g.show();
+			g1 = new Grafico(etiqueta1, "Mediana");
+			g1.show();
+//		
+//			
+//			ImageIcon imagenmuestra2 = new ImageIcon(imgAclarada);
+//			JLabel etiqueta2 = new JLabel(imagenmuestra1);
+//			g = new Grafico(etiqueta1, "Aclarado");
+//			g.show();
 			
 			ImageIcon imagenmuestra3 = new ImageIcon(imgSegmentacion);
 			JLabel etiqueta3 = new JLabel(imagenmuestra3);
-			g3 = new Grafico(etiqueta3, "Segmentacion");
+			g3 = new Grafico(etiqueta3, "Segmentacion Mediana");
 			g3.show();
 			
-			int wAclarada = imgAclarada.getWidth();
-			int hAclarada = imgAclarada.getHeight(null);
-			for(int i=1; i<wAclarada; i++){
-				if(i%21==0){
-					for(int j=1; j<hAclarada;j++){
-						if(j%21==0){
-							
-							value =  imgAclarada.getRGB(i,j);
-							rgbs = Colores.obtieneRGB(value);
-							Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
-							colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
-							contador[colorpixel]++;
+//			int wAclarada = imgAclarada.getWidth();
+//			int hAclarada = imgAclarada.getHeight(null);
+//			for(int i=1; i<wAclarada; i++){
+//				if(i%21==0){
+//					for(int j=1; j<hAclarada;j++){
+//						if(j%21==0){
+//							
+//							value =  imgAclarada.getRGB(i,j);
+//							rgbs = Colores.obtieneRGB(value);
+//							Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
+//							colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
+//							contador[colorpixel]++;
+//
+//
+//						}
+//					}
+//				}
+//			}
 
-
-						}
-					}
-				}
-			}
-
-			ganador=0;
-			pixelesAnalizados=0;
-			
-			for(int i=0;i<14;i++){
-				pixelesAnalizados+=contador[i];
-				if(contador[i]>ganador){
-					ganador=contador[i];
-					colorpixel=i;
-				}
-			}
-	
-			s = new Sonido(colorpixel);
+//			ganador=0;
+//			pixelesAnalizados=0;
+//			
+//			for(int i=0;i<14;i++){
+//				pixelesAnalizados+=contador[i];
+//				if(contador[i]>ganador){
+//					ganador=contador[i];
+//					colorpixel=i;
+//				}
+//			}
+//	
+//			s = new Sonido(colorpixel);
 
 		    	
 
@@ -170,9 +157,8 @@ public class Detector {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
+		return lblDetecta = new JLabel("Color ",JLabel.CENTER);
 	}
 	
 	
 }
-	

@@ -8,17 +8,23 @@ import javax.swing.JMenuItem;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import clases.Detector;
+import clases.DetectorMedia;
+import clases.DetectorMediana;
 
 //@Desc Implementa la gestión de evento en la interfaz de usuario
 public class Controlador implements ActionListener, ChangeListener{
 	ManejadorDeImagenes manejador;
 	PanelSwing panel;
 	Detector detector;
+	DetectorMedia detectorMedia;
+	DetectorMediana detectorMediana;
  
 	public Controlador(PanelSwing panel) {
 		this.panel = panel;
 		manejador = new ManejadorDeImagenes();
 		detector = new Detector();
+		detectorMedia = new DetectorMedia();
+		detectorMediana = new DetectorMediana();
 	}
 
 	// @Desc Método que capturará los eventos ocurridos en el menú principal del sistema
@@ -30,7 +36,8 @@ public class Controlador implements ActionListener, ChangeListener{
 				panel.guardar.setEnabled(true);
 	//    		panel.detecta1.setEnabled(true);
 				panel.detecta.setEnabled(true);
-	  
+				panel.detectaMedia.setEnabled(true);
+				panel.detectaMediana.setEnabled(true);
 				panel.esqueInf.show(panel.panelBajo, "carta1");
 			}
 		}
@@ -49,6 +56,24 @@ public class Controlador implements ActionListener, ChangeListener{
 			panel.panelDetecta.remove(0);
 			panel.panelDetecta.add("Center", lbl);
 			panel.esqueInf.show(panel.panelBajo, "carta2");
+		}
+		
+		else if(i.getText() == "Media"){
+			//		panel.panelBajo.remove(0);
+				  
+					JLabel lbl = manejador.detectaColorMedia(detectorMedia);
+					panel.panelDetecta.remove(0);
+					panel.panelDetecta.add("Center", lbl);
+					panel.esqueInf.show(panel.panelBajo, "carta2");
+		}
+		
+		else if(i.getText() == "Mediana"){
+			//		panel.panelBajo.remove(0);
+				  
+					JLabel lbl = manejador.detectaColorMediana(detectorMediana);
+					panel.panelDetecta.remove(0);
+					panel.panelDetecta.add("Center", lbl);
+					panel.esqueInf.show(panel.panelBajo, "carta2");
 		}
 	}
 	  

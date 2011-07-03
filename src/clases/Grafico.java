@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class Grafico extends JFrame{
-	public Grafico(JLabel et){
-		super("Muestra de Imagen en JAVA...");
+	public Grafico(JLabel et, String nombre){
+		super(nombre);
 		
 		//Agrego etiqueta que contiene la imagen al frame
 		getContentPane().add(et);
@@ -18,7 +18,7 @@ public class Grafico extends JFrame{
 	public static void main(String H[]){
 		ImageIcon imagen = new ImageIcon("D:/Descargas/rojo1.jpg");
 		JLabel etiqueta = new JLabel(imagen);
-		Grafico p = new Grafico(etiqueta);
+		Grafico p = new Grafico(etiqueta, "Prueba");
 		p.show();
 		
 		//Permite cerrar la ventana

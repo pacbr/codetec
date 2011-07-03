@@ -9,12 +9,12 @@ public class EditorImg extends JFrame{
 	PanelSwing panel;
 	Controlador controlador;
 	public static void main(String[] args) {
-		try {
-			//System.out.println("esperamos 1'5 seg...");
-			Thread.sleep(1500);
-			} catch (InterruptedException x) {
-			System.out.println("ha existido algún error...");
-		}
+//		try {
+//			//System.out.println("esperamos 1'5 seg...");
+//			Thread.sleep(1500);
+//			} catch (InterruptedException x) {
+//			System.out.println("ha existido algún error...");
+//		}
 
 		EditorImg editor = new EditorImg();
 		editor.setBounds(120, 120, 800, 600);
@@ -39,6 +39,11 @@ public class EditorImg extends JFrame{
 		panel.salir.addActionListener(controlador);
 		//  panel.detecta1.addActionListener(controlador);
 		panel.detecta.addActionListener(controlador);
+		
+		panel.detectaMedia.addActionListener(controlador);
+		panel.detectaMediana.addActionListener(controlador);
+		
+		
 		contentPane.add(panel);
 	}
 }
