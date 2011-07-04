@@ -9,45 +9,46 @@ public class Colores {
 	public Colores(){
 		coloresMap.put(0, "Rojo");
 		coloresMap.put(1, "Naranja");
-		coloresMap.put(2, "Amarillo");
-		coloresMap.put(3, "Gris");
+		coloresMap.put(2, "Marron");
+		coloresMap.put(3, "Amarillo");
 		coloresMap.put(4, "Verde");
-		coloresMap.put(5, "Verde agua");
-		coloresMap.put(6, "Celeste");
-		coloresMap.put(7, "Azul");
-		coloresMap.put(8, "Violeta");
-		coloresMap.put(9, "Rosa");
-		coloresMap.put(10, "Negro");
-		coloresMap.put(11, "Blanco");
+		coloresMap.put(5, "Celeste");
+		coloresMap.put(6, "Azul");
+		coloresMap.put(7, "Violeta");
+		coloresMap.put(8, "Rosa");
+		coloresMap.put(9, "Blanco");
+		coloresMap.put(10, "Gris");
+		coloresMap.put(11, "Negro");
+		
 	}
 	
 	public int colorAHexadecimal(Integer color){
 		Integer valor = null;
-		if(color == 0){
+		if(color == 0){//Rojo
 			valor = 0xFF0000;
-		}else if(color == 1){
+		}else if(color == 1){//Naranja
 			valor = 0xFF8000;
-		}else if(color == 2){
+		}else if(color == 2){//Marron
+			valor = 0x800000;
+		}else if(color == 3){//Amarillo
 			valor = 0xFFFF00;
-		}else if(color == 3){
-			valor = 0x848484;
-//			valor = 0x6B8E23; //VERDE Oliva
-		}else if(color == 4){
+		}else if(color == 4){//Verde
 			valor = 0x00FF00;
-		}else if(color == 5){
-			valor = 0x7FFFD4;
-		}else if(color == 6){
+		}else if(color == 5){//Celeste
 			valor = 0x00FFFF;
-		}else if(color == 7){
+		}else if(color == 6){//Azul
 			valor = 0x0000FF;
-		}else if(color == 8){
+		}else if(color == 7){//Violeta
 			valor = 0xEE82EE;
-		}else if(color == 9){
+		}else if(color == 8){//Rosa
 			valor = 0xFF1493;
-		}else if(color == 10){
-			valor = 0x000000;
-		}else if(color == 11){
+		}else if(color == 9){//Blanco
 			valor = 0xFFFFFF;
+		}else if(color == 10){//Gris
+			valor = 0x848484;
+		}else if(color == 11){//Negro
+			valor = 0x000000;
+		
 		}
 		return valor;
 	}
@@ -61,20 +62,20 @@ public class Colores {
 		
 		if (((saturacion<9 && brillo>97)||(saturacion<6 && brillo>89))&&!enc){
 			//			System.out.println("Color BLANCO");
-			color = 11;
+			color = 9;
 			enc=true;
 		}else if (((brillo<13)||(saturacion<5)&&(brillo<30))&&!enc){
 //			System.out.println("Color NEGRO");
-			color = 10;
+			color = 11;
 			enc=true;
 		}
 		else if (((saturacion<=10 && brillo>30&& brillo<80)||(saturacion<=6 && brillo>30&& brillo<=90)||(saturacion<=20 && brillo<=48)||(saturacion<15 && brillo<60)||(saturacion<10 && brillo<76)||(saturacion<5 && brillo<90)) && !enc){
 //			System.out.println("Color GRIS");
-			color = 3;
+			color = 10;
 			enc=true;
 		}else if ((matiz<=14.0 || matiz>347) &&!enc){
 	//			System.out.println("Color ROJO");
-				if(brillo<30) color = 10;
+				if(brillo<30) color = 11;
 				else color = 0;
 				enc=true;
 		}else if ((matiz>=14.0 && matiz<41)&&!enc){
@@ -83,42 +84,39 @@ public class Colores {
 				enc=true;
 		}else if ((matiz>=41 && matiz<71)&&!enc){
 //			System.out.println("Color AMARILLO");
+			color = 3;
+			enc=true;
+		
+		
+		//TODO marron
+		}else if ((matiz>=111111141 && matiz<111111171)&&!enc){
+//			System.out.println("Color Marron");
 			color = 2;
 			enc=true;
-		}
-		
-//		if (matiz>=90 && matiz<120){
-//			System.out.println("Color Verde Oliva");
-//			
-//			
-//		}	
-		
-		else if ((matiz>=71 && matiz<150)&&!enc){
+			
+		}else if ((matiz>=71 && matiz<150)&&!enc){
 //			System.out.println("Color Verde");
 			color = 4;
 			enc=true;
-		}else if ((matiz>=150 && matiz<161)&&!enc){
-//			System.out.println("Color Verde agua");
-			color = 5;
-			enc=true;
+		
 		}else if (((matiz>=161 && matiz<190) || (saturacion>15 && saturacion<36&& brillo>80))&&!enc){
 //			System.out.println("Color Celeste");
-			color = 6;
+			color = 5;
 			enc=true;
 		}else if ((matiz>=190 && matiz<262)&&!enc){
 //			System.out.println("Color Azul");
-			color = 7;
+			color = 6;
 			enc=true;
 		}else if (((matiz>=262 && matiz<320)|| (matiz>248 && matiz<333 && brillo>15 && brillo<75))&&!enc){
 //			System.out.println("Color Violeta");
-			color = 8;
+			color = 7;
 			enc=true;
 		}else if (((matiz>=320 && matiz<347) || (matiz>353 && saturacion<70) || (matiz<7 && saturacion<70))&&!enc)  {
 //			System.out.println("Color Rosa");
-			color = 9;
+			color = 8;
 			enc=true;
 		}else{
-			color = 10;
+			color = 11;
 		}
 		return color;
 	}
