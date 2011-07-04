@@ -73,9 +73,9 @@ public class Detector {
 			color = new Colores();
 			
 			
-			contador = new int[14];
+			contador = new int[12];
 
-			for(int i=0;i<=13;i++){
+			for(int i=0;i<12;i++){
 				contador[i] = 0;
 			}
 			
@@ -139,7 +139,7 @@ public class Detector {
 			ganador=0;
 			pixelesAnalizados=0;
 			
-			for(int i=0;i<14;i++){
+			for(int i=0;i<12;i++){
 				pixelesAnalizados+=contador[i];
 				if(contador[i]>ganador){
 					ganador=contador[i];

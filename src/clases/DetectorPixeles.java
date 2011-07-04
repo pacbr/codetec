@@ -5,8 +5,12 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 import clases.Colores;
 import clases.Sonido;
 
@@ -21,14 +25,15 @@ public class DetectorPixeles extends JFrame{
     private JButton botones[];
     Colores c = new Colores();
     GridBagConstraints gbc;
-    
+    Map<Integer, String> coloresMap;
     JPanel panelBajo = new JPanel();
     CardLayout esqueInf = new CardLayout();
-    JPanel panelColor;
-    JPanel panelVacio = new JPanel();
+    Box caja;
+    JPanel panelColores;
     public DetectorPixeles(BufferedImage imagenCuantizada){
     	panelBajo.setLayout(esqueInf);
     	image = imagenCuantizada;
+    	coloresMap = new Colores().getColoresMap();
     }
 	
 //    public void setImage(BufferedImage image) {
@@ -51,27 +56,51 @@ public class DetectorPixeles extends JFrame{
 	}
 
     
+	public void setPorcentaje(int color, String porcentaje){
+		
+		JPanel a = (JPanel)caja.getComponent(color);
+//		JButton b =(JButton)a.getComponent(0);
+		String p = porcentaje;
+		p = porcentaje.replaceAll(",", ".");
+		p = p.replaceAll("%", "");
+//		System.out.println(p);
+		JPanel jpBarra = new JPanel();
+		float numFloat = Float.parseFloat(p);
+//		if(numFloat>0.0)
+//		b.setPreferredSize(new Dimension((15+(int)Float.parseFloat(p)*130/100),20));
+//		b.setPreferredSize(new Dimension(93,20));
+		jpBarra.setPreferredSize(new Dimension((1+(int)Float.parseFloat(p)*130/100),20));
+		jpBarra.setBackground(new Color(c.colorAHexadecimal(color)));
+		jpBarra.setBorder(LineBorder.createBlackLineBorder());
+		jpBarra.add(new JLabel());
+		
+		a.add(jpBarra);
+		a.add(new JLabel(porcentaje));
+	}
+	
     private JPanel getRight(){
     	JPanel right = new JPanel();
 		right.setSize(100, image.getHeight());
 		Container contenido=getContentPane(); 
 		contenido.setLayout(new FlowLayout()); 
-		Box caja = Box.createVerticalBox(); 
+		caja = Box.createVerticalBox();
+		
 		botones = new JButton[ 12 ];
 		for ( int cuenta = 0; cuenta < botones.length; cuenta++ ) {
-			JButton button = new JButton(new Colores().getColoresMap().get(cuenta));
-			button.setFont(new Font("Verdana", Font.BOLD, 13));
-			button.setPreferredSize(new Dimension(130,20));
+			JButton button = new JButton(coloresMap.get(cuenta));
+			button.setFont(new Font("Verdana", Font.BOLD, 11));
+			button.setPreferredSize(new Dimension(100,20));
 			botones[cuenta] = button;
-			JPanel jp = new JPanel();
-			if((c.getColoresMap().get(cuenta) != "Negro")){
-				botones[cuenta].setForeground(Color.black);
-			}else botones[cuenta].setForeground(Color.white);
-				botones[cuenta].setBackground(new Color(c.colorAHexadecimal(cuenta)));
-			
-			jp.add(botones[cuenta]);
-			jp.add(new JLabel("%"));
-			caja.add(jp);
+			panelColores = new JPanel();
+			panelColores.setLayout(new FlowLayout(FlowLayout.LEFT)); 
+//			if((coloresMap.get(cuenta) != "Negro")){
+//				botones[cuenta].setForeground(Color.black);
+//			}else botones[cuenta].setForeground(Color.white);
+//				botones[cuenta].setBackground(new Color(c.colorAHexadecimal(cuenta)));
+//			
+			panelColores.add(botones[cuenta]);
+//			panelColores.add(new JLabel("Inicio"));
+			caja.add(panelColores);
 		}
 			panelBajo.setBackground(Color.gray);
 			JLabel titulo = new JLabel("Pincha sobre la imagen");

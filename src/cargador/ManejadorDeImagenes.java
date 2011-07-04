@@ -2,6 +2,7 @@ package cargador;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
@@ -93,11 +94,6 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 imagenCuantizada=detector.getImagenCuantizada();
 	 int contador[]=detector.getContadorPixeles();
 	 int pixelesAnalizados = detector.getPixelesAnalizados();
-	 Map<Integer,String> map = new Colores().getColoresMap();
-	 
-	 for(int i=0;i<contador.length;i++){
-		 System.out.println(map.get(i)+": "+(float)(100*contador[i])/pixelesAnalizados+"%");
-	 }
 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada);
      JFrame f = new JFrame("Imagen");
@@ -109,6 +105,18 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
      f.setLocationRelativeTo(null);
      f.setVisible(true);
 	 
+     
+
+	 DecimalFormat formateador = new DecimalFormat("####.#%");
+	 String porcentaje;
+	 for(int i=0;i<contador.length;i++){
+		 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
+		 detPix.setPorcentaje(i,porcentaje);
+
+	 }
+     
+     
+     
 	 return jl;
 	 
 //	 c.imprimeConfirmacion();

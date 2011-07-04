@@ -23,36 +23,36 @@ private static final long serialVersionUID = 1L;
 			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/naranja.wav");
 			break;
 		case 2:
-			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/amarillo.wav");
+			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/marron.wav");
 			break;
 		case 3:
-			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/verdeoliva.wav");
+			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/amarillo.wav");
 			break;
 		case 4:
 			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/verde.wav");
 			break;
 		case 5:
-			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/verdeagua.wav");
-			break;
-		case 6:
 			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/celeste.wav");
 			break;
-		case 7:
+		case 6:
 			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/azul.wav");
 			break;
-		case 8:
+		case 7:
 			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/violeta.wav");
 			break;
-		case 9:
+		case 8:
 			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/rosa.wav");
 			break;
-		case 10:
-			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/negro.wav");
-			break;
-		case 11:
+		case 9:
 			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/blanco.wav");
 			break;
-
+		case 10:
+			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/gris.wav");
+			break;
+		case 11:
+			sf = new File(System.getProperty("user.dir")+"/sonidoscolores/negro.wav");
+			break;
+		
 
 
 		}
