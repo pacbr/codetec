@@ -47,6 +47,12 @@ public class Segmentacion {
 
 
 
+	public Segmentacion() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public BufferedImage recuadraImagen (BufferedImage ImageBfrd) {
 		   
 		   
@@ -70,6 +76,26 @@ public class Segmentacion {
 
 
 
+	public BufferedImage escalaDeGrisesConColor(BufferedImage imagen, int color){
+		int w = imagen.getWidth();
+		int h = imagen.getHeight(null);
+		Colores colores = new Colores();
+		BufferedImage imgg=new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		BufferedImage imgEG = escalaDeGrises(imagen);
+		for(int c=0;c<w;c++){
+			for(int r=0;r<h;r++){
+				if(colores.obtieneColor(imagen.getRGB(c, r)) == color){
+//					System.out.println(colores.obtieneColor(imgg.getRGB(c, r)));
+					imgg.setRGB(c, r, new Colores().colorAHexadecimal(color));
+					
+				}else
+					imgg.setRGB(c, r, imgEG.getRGB(c,r));
+				
+			}
+		}
+		return imgg;
+	}
+	
 
 	public BufferedImage escalaDeGrises(BufferedImage imagen){
 		int w = imagen.getWidth();

@@ -53,6 +53,17 @@ public class Colores {
 		return valor;
 	}
 	
+	public Integer obtieneNumeroColor (String nombreColor){
+		Integer numColor=null;
+		for(int i=0;i<coloresMap.keySet().size();i++){
+			if(coloresMap.get(i)==nombreColor){
+				numColor=i;
+				break;
+			}
+		}
+		return numColor;
+	}
+	
 	public static Integer decideColor(float h, float s, float v){
 		Integer color = null;
 		float matiz = h*360;
@@ -68,8 +79,7 @@ public class Colores {
 //			System.out.println("Color NEGRO");
 			color = 11;
 			enc=true;
-		}
-		else if (((saturacion<=10 && brillo>30&& brillo<80)||(saturacion<=6 && brillo>30&& brillo<=90)||(saturacion<=20 && brillo<=48)||(saturacion<15 && brillo<60)||(saturacion<10 && brillo<76)||(saturacion<5 && brillo<90)) && !enc){
+		}else if (((saturacion<=10 && brillo>30&& brillo<80)||(saturacion<=6 && brillo>30&& brillo<=90)||(saturacion<=20 && brillo<=48)||(saturacion<15 && brillo<60)||(saturacion<10 && brillo<76)||(saturacion<5 && brillo<90)) && !enc){
 //			System.out.println("Color GRIS");
 			color = 10;
 			enc=true;
@@ -89,7 +99,7 @@ public class Colores {
 		
 		
 		//TODO marron
-		}else if ((matiz>=111111141 && matiz<111111171)&&!enc){
+		}else if (matiz>25 && matiz<31 && ((saturacion>31 && saturacion<60 && brillo > 30 && brillo < 82)|| (saturacion>31 && brillo > 30 && brillo < 55))&&!enc){
 //			System.out.println("Color Marron");
 			color = 2;
 			enc=true;

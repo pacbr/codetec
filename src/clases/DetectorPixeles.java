@@ -84,20 +84,34 @@ public class DetectorPixeles extends JFrame{
 		Container contenido=getContentPane(); 
 		contenido.setLayout(new FlowLayout()); 
 		caja = Box.createVerticalBox();
-		
 		botones = new JButton[ 12 ];
+		ActionListener actionListener = new ActionListener() {
+			Segmentacion seg = new Segmentacion();
+			Grafico g;
+		      public void actionPerformed(ActionEvent actionEvent) {
+		        BufferedImage imagenEscalaGrises = seg.escalaDeGrisesConColor(image, c.obtieneNumeroColor(actionEvent.getActionCommand()));
+				ImageIcon imagenmuestra1 = new ImageIcon(imagenEscalaGrises);
+				JLabel etiqueta1 = new JLabel(imagenmuestra1);
+				g = new Grafico(etiqueta1,actionEvent.getActionCommand());
+				g.show();
+		      }
+		    };
+		
 		for ( int cuenta = 0; cuenta < botones.length; cuenta++ ) {
 			JButton button = new JButton(coloresMap.get(cuenta));
 			button.setFont(new Font("Verdana", Font.BOLD, 11));
 			button.setPreferredSize(new Dimension(100,20));
+			button.addActionListener(actionListener);
 			botones[cuenta] = button;
 			panelColores = new JPanel();
 			panelColores.setLayout(new FlowLayout(FlowLayout.LEFT)); 
-//			if((coloresMap.get(cuenta) != "Negro")){
-//				botones[cuenta].setForeground(Color.black);
-//			}else botones[cuenta].setForeground(Color.white);
-//				botones[cuenta].setBackground(new Color(c.colorAHexadecimal(cuenta)));
-//			
+			
+			if((coloresMap.get(cuenta) != "Negro")){
+				botones[cuenta].setForeground(Color.black);
+			}else botones[cuenta].setForeground(Color.white);
+				
+			botones[cuenta].setBackground(new Color(c.colorAHexadecimal(cuenta)));
+			
 			panelColores.add(botones[cuenta]);
 //			panelColores.add(new JLabel("Inicio"));
 			caja.add(panelColores);
