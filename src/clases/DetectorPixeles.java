@@ -3,11 +3,13 @@ package clases;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.renderable.ParameterBlock;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.media.jai.JAI;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -92,8 +94,21 @@ public class DetectorPixeles extends JFrame{
 		        BufferedImage imagenEscalaGrises = seg.escalaDeGrisesConColor(image, c.obtieneNumeroColor(actionEvent.getActionCommand()));
 				ImageIcon imagenmuestra1 = new ImageIcon(imagenEscalaGrises);
 				JLabel etiqueta1 = new JLabel(imagenmuestra1);
-				g = new Grafico(etiqueta1,actionEvent.getActionCommand());
-				g.show();
+				g = new Grafico(etiqueta1,actionEvent.getActionCommand(),new JLabel(new ImageIcon(seg.escalaDeGrises(image))));
+				 ParameterBlock pb = new ParameterBlock();
+			        pb.addSource(image);
+//			        pb.add(kernel);
+			        
+			        BufferedImage imageGray = new BufferedImage(image.getWidth(), image.getHeight(),  
+			        	    BufferedImage.TYPE_BYTE_GRAY);  
+			        	Graphics g2 = image.getGraphics();  
+			        	g2.drawImage(image, 0, 0, null);  
+			        	g2.dispose();
+			        	
+			        
+//			        g = new Grafico(etiqueta1,actionEvent.getActionCommand(),new JLabel(new ImageIcon(JAI.create("convertToGrayscale", pb).getAsBufferedImage())));
+//				g.show();
+				
 		      }
 		    };
 		
