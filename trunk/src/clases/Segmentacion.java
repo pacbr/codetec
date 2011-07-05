@@ -80,19 +80,31 @@ public class Segmentacion {
 		int w = imagen.getWidth();
 		int h = imagen.getHeight(null);
 		Colores colores = new Colores();
-		BufferedImage imgg=new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		BufferedImage imagenRGB=new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		
 		BufferedImage imgEG = escalaDeGrises(imagen);
+		BufferedImage imagenGrisClaro=escalaDeGrisesEnRGB(imgEG); 
 		for(int c=0;c<w;c++){
 			for(int r=0;r<h;r++){
 				if(colores.obtieneColor(imagen.getRGB(c, r)) == color){
 //					System.out.println(colores.obtieneColor(imgg.getRGB(c, r)));
-					imgg.setRGB(c, r, new Colores().colorAHexadecimal(color));
+					imagenRGB.setRGB(c, r, new Colores().colorAHexadecimal(color));
 					
 				}else
-					imgg.setRGB(c, r, imgEG.getRGB(c,r));
+					imagenRGB.setRGB(c, r, imagenGrisClaro.getRGB(c,r));
 				
 			}
 		}
+		return imagenRGB;
+	}
+	
+	
+	public BufferedImage escalaDeGrisesEnRGB(BufferedImage imagen){
+		int w = imagen.getWidth();
+		int h = imagen.getHeight(null);
+		BufferedImage imgg=new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		Graphics g = imgg.getGraphics();  
+		g.drawImage(imagen, 0, 0, null);
 		return imgg;
 	}
 	
