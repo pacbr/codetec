@@ -91,23 +91,13 @@ public class DetectorPixeles extends JFrame{
 			Segmentacion seg = new Segmentacion();
 			Grafico g;
 		      public void actionPerformed(ActionEvent actionEvent) {
-		        BufferedImage imagenEscalaGrises = seg.escalaDeGrisesConColor(image, c.obtieneNumeroColor(actionEvent.getActionCommand()));
-				ImageIcon imagenmuestra1 = new ImageIcon(imagenEscalaGrises);
-				JLabel etiqueta1 = new JLabel(imagenmuestra1);
-				g = new Grafico(etiqueta1,actionEvent.getActionCommand(),new JLabel(new ImageIcon(seg.escalaDeGrises(image))));
-				 ParameterBlock pb = new ParameterBlock();
-			        pb.addSource(image);
-//			        pb.add(kernel);
-			        
-			        BufferedImage imageGray = new BufferedImage(image.getWidth(), image.getHeight(),  
-			        	    BufferedImage.TYPE_BYTE_GRAY);  
-			        	Graphics g2 = image.getGraphics();  
-			        	g2.drawImage(image, 0, 0, null);  
-			        	g2.dispose();
-			        	
-			        
-//			        g = new Grafico(etiqueta1,actionEvent.getActionCommand(),new JLabel(new ImageIcon(JAI.create("convertToGrayscale", pb).getAsBufferedImage())));
-//				g.show();
+		    	BufferedImage imagenGrisClaro = seg.escalaDeGrisesEnRGB(seg.escalaDeGrises(image));
+				BufferedImage imagenEscalaGrisesColor = seg.escalaDeGrisesConColor(image, imagenGrisClaro,c.obtieneNumeroColor(actionEvent.getActionCommand()));
+				ImageIcon im1 = new ImageIcon(imagenEscalaGrisesColor);
+				ImageIcon im2 = new ImageIcon(imagenGrisClaro);
+				
+				g = new Grafico(new JLabel(im1),actionEvent.getActionCommand(),new JLabel(im2));
+//				 
 				
 		      }
 		    };
