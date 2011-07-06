@@ -10,8 +10,8 @@ import javax.swing.event.ChangeListener;
  static final long serialVersionUID = 10000;
  String nombreArchivo, ruta;
  JMenuBar barraMenu;
- JMenu menuArchivo, menuDetecta, menuDetectaMedia,menuDetectaMediana;
- JMenuItem abrir, abrir2, guardar, salir, detecta1, detecta, detectaMedia, detectaMediana, ayuda;
+ JMenu menuArchivo, menuFiltros, menuDetecta;
+ JMenuItem abrir, abrir2, guardar, salir,detectaMedia,detectaMediana, detecta1, detecta, ayuda;
  JScrollPane panelDespl;
  JPanel panelBajo, panelDetecta, panelColor, panelVacio;
  int altura = 80;
@@ -34,6 +34,7 @@ import javax.swing.event.ChangeListener;
   f.setAlignment(FlowLayout.LEFT);
   barraMenu.setLayout(f);
   menuArchivo = new JMenu("Archivo");
+  menuFiltros = new JMenu("Filtros");
 //  menuDetecta = new JMenu("Detecta1");
   abrir = menuArchivo.add("Abrir");
   guardar = menuArchivo.add("Guardar");
@@ -43,22 +44,29 @@ import javax.swing.event.ChangeListener;
   barraMenu.add(menuArchivo);
   
   
-//  detecta1 = menuDetecta.add("Detecta1");
+  detectaMedia = menuFiltros.add("Media");
+  detectaMediana = menuFiltros.add("Mediana");
+  detectaMedia.setEnabled(false);
+  detectaMediana.setEnabled(false);
+  barraMenu.add(menuFiltros);
+  
+  
+
   detecta = menuArchivo.add("Detecta");
-//  detecta1.setEnabled(false);
+
   detecta.setEnabled(false);
-//  barraMenu.add(menuDetecta); 
+
   barraMenu.add(detecta); //PARA AGREGAR JMENUITEM HAY QUE TOCAR TB EN LAS CLASES EDITORIMG y CONTROLADOR
   
   
-  detectaMedia = menuArchivo.add("Media");
-detectaMedia.setEnabled(false);
-barraMenu.add(detectaMedia);
-
-
-detectaMediana = menuArchivo.add("Mediana");
-detectaMediana.setEnabled(false);
-barraMenu.add(detectaMediana);
+//  detectaMedia = menuArchivo.add("Media");
+//detectaMedia.setEnabled(false);
+//barraMenu.add(detectaMedia);
+//
+//
+//detectaMediana = menuArchivo.add("Mediana");
+//detectaMediana.setEnabled(false);
+//barraMenu.add(detectaMediana);
   
 
 ayuda = menuArchivo.add("Ayuda");

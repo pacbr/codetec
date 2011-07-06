@@ -119,19 +119,75 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
      
 	 return jl;
 	 
-//	 c.imprimeConfirmacion();
+
  }
  
  public JLabel detectaColorMedia(DetectorMedia detectorMedia){
 	 
-	 return detectorMedia.ejecuta(ruta);
+	 BufferedImage imagenCuantizada;
+	 JLabel jl = detectorMedia.ejecuta(ruta);
+	 imagenCuantizada=detectorMedia.getImagenCuantizada();
+	 int contador[]=detectorMedia.getContadorPixeles();
+	 int pixelesAnalizados = detectorMedia.getPixelesAnalizados();
+	 
+	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada);
+     JFrame f = new JFrame("Imagen");
+     
+//     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     JPanel nuevoJPanel = detPix.getContent();
+     f.add(nuevoJPanel);
+     f.pack();
+     f.setLocationRelativeTo(null);
+     f.setVisible(true);
+	 
+     
+
+	 DecimalFormat formateador = new DecimalFormat("####.#%");
+	 String porcentaje;
+	 for(int i=0;i<contador.length;i++){
+		 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
+		 detPix.setPorcentaje(i,porcentaje);
+
+	 }
+     
+     
+     
+	 return jl;
 	 
 //	 c.imprimeConfirmacion();
  }
  
  public JLabel detectaColorMediana(DetectorMediana detectorMediana){
 	 
-	 return detectorMediana.ejecuta(ruta);
+	 BufferedImage imagenCuantizada;
+	 JLabel jl = detectorMediana.ejecuta(ruta);
+	 imagenCuantizada=detectorMediana.getImagenCuantizada();
+	 int contador[]=detectorMediana.getContadorPixeles();
+	 int pixelesAnalizados = detectorMediana.getPixelesAnalizados();
+	 
+	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada);
+     JFrame f = new JFrame("Imagen");
+     
+//     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     JPanel nuevoJPanel = detPix.getContent();
+     f.add(nuevoJPanel);
+     f.pack();
+     f.setLocationRelativeTo(null);
+     f.setVisible(true);
+	 
+     
+
+	 DecimalFormat formateador = new DecimalFormat("####.#%");
+	 String porcentaje;
+	 for(int i=0;i<contador.length;i++){
+		 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
+		 detPix.setPorcentaje(i,porcentaje);
+
+	 }
+     
+     
+     
+	 return jl;
 	 
 //	 c.imprimeConfirmacion();
  }
