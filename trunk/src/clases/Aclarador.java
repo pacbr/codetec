@@ -20,7 +20,7 @@ public class Aclarador{
 				valorRGB = imagen.getRGB(r,c);
 				
 //				System.out.println(r+","+c);
-				if(col.obtieneColor(imagen.getRGB(r,c))!=10){
+				if(col.obtieneColor(imagen.getRGB(r,c))!=11){
 //					if(r==41 && c==190){
 //						System.out.println("El color es: "+Colores.decideColor(valoresRGB[0], valoresRGB[1], valoresRGB[2]));
 //						int ii=41;
