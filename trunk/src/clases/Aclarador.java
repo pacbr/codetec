@@ -14,13 +14,14 @@ public class Aclarador{
 		int valoresRGB[] = new int[3];
 		float valoresHSB[] = new float[3];
 		Colores col = new Colores();
+		int negro = col.obtieneNumeroColor("Negro");
 		for(int r=0;r<w;r++){
 			
 			for(int c=0;c<h;c++){
 				valorRGB = imagen.getRGB(r,c);
 				
 //				System.out.println(r+","+c);
-				if(col.obtieneColor(imagen.getRGB(r,c))!=11){
+				if(col.obtieneColor(imagen.getRGB(r,c))!=negro){
 //					if(r==41 && c==190){
 //						System.out.println("El color es: "+Colores.decideColor(valoresRGB[0], valoresRGB[1], valoresRGB[2]));
 //						int ii=41;
