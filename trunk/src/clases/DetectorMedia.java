@@ -12,13 +12,31 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class DetectorMedia {
-	
+	static 
+	{ 
+	      System.setProperty("com.sun.media.jai.disableMediaLib", "true"); 
+	} 
 	int rgbs[];
 	float hsb[];
 	Integer colorpixel = null;
 	int pixelesAnalizados;
 	int ganador;
 	Sonido s;
+	BufferedImage imagenCuantizada2;
+	int contador[];
+	
+	public BufferedImage getImagenCuantizada(){
+		return imagenCuantizada2;
+	}
+	
+	public int[] getContadorPixeles(){
+		return contador;
+	}
+	
+	public int getPixelesAnalizados(){
+		return pixelesAnalizados;
+	}
+	
 	
 	public JLabel ejecuta(String ruta){
 		 
@@ -26,11 +44,6 @@ public class DetectorMedia {
 		BufferedImage img;
 		BufferedImage imgAclarada;
 		BufferedImage imgMedia;
-		BufferedImage imgSegmentacion;
-		Grafico g;
-		Grafico g1;
-		Grafico g2;
-		Grafico g3;
 		JLabel lblDetecta;
 		Colores color;
 		Segmentacion seg;
@@ -54,9 +67,9 @@ public class DetectorMedia {
 			color = new Colores();
 			
 			
-			int contador[] = new int[14];
+			contador = new int[12];
 
-			for(int i=0;i<=13;i++){
+			for(int i=0;i<12;i++){
 				contador[i] = 0;
 			}
 			
@@ -69,13 +82,13 @@ public class DetectorMedia {
 			
 			imgAclarada = aclarador.aclara(imgMedia);
 		
-			imgSegmentacion = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
-			Map<Integer,List<Pixel>> mapa = Segmentacion.segmentaFinal(imgAclarada, imgSegmentacion);
+			imagenCuantizada2 = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
+			Map<Integer,List<Pixel>> mapa = Segmentacion.segmentaFinal(imgAclarada, imagenCuantizada2);
 			
-			ImageIcon imagenmuestra1 = new ImageIcon(imgMedia);
-			JLabel etiqueta1 = new JLabel(imagenmuestra1);
-			g1 = new Grafico(etiqueta1, "Media");
-			g1.show();
+//			ImageIcon imagenmuestra1 = new ImageIcon(imgMedia);
+//			JLabel etiqueta1 = new JLabel(imagenmuestra1);
+//			g1 = new Grafico(etiqueta1, "Media");
+//			g1.show();
 //		
 //			
 //			ImageIcon imagenmuestra2 = new ImageIcon(imgAclarada);
@@ -83,42 +96,42 @@ public class DetectorMedia {
 //			g = new Grafico(etiqueta1, "Aclarado");
 //			g.show();
 			
-			ImageIcon imagenmuestra3 = new ImageIcon(imgSegmentacion);
-			JLabel etiqueta3 = new JLabel(imagenmuestra3);
-			g3 = new Grafico(etiqueta3, "Segmentacion Media");
-			g3.show();
+//			ImageIcon imagenmuestra3 = new ImageIcon(imgSegmentacion);
+//			JLabel etiqueta3 = new JLabel(imagenmuestra3);
+//			g3 = new Grafico(etiqueta3, "Segmentacion Media");
+//			g3.show();
 			
-//			int wAclarada = imgAclarada.getWidth();
-//			int hAclarada = imgAclarada.getHeight(null);
-//			for(int i=1; i<wAclarada; i++){
-//				if(i%21==0){
-//					for(int j=1; j<hAclarada;j++){
-//						if(j%21==0){
-//							
-//							value =  imgAclarada.getRGB(i,j);
-//							rgbs = Colores.obtieneRGB(value);
-//							Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
-//							colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
-//							contador[colorpixel]++;
-//
-//
-//						}
-//					}
-//				}
-//			}
+			int wAclarada = imgAclarada.getWidth();
+			int hAclarada = imgAclarada.getHeight(null);
+			for(int i=1; i<wAclarada; i++){
+				if(i%21==0){
+					for(int j=1; j<hAclarada;j++){
+						if(j%21==0){
+							
+							value =  imgAclarada.getRGB(i,j);
+							rgbs = Colores.obtieneRGB(value);
+							Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
+							colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
+							contador[colorpixel]++;
 
-//			ganador=0;
-//			pixelesAnalizados=0;
-//			
-//			for(int i=0;i<14;i++){
-//				pixelesAnalizados+=contador[i];
-//				if(contador[i]>ganador){
-//					ganador=contador[i];
-//					colorpixel=i;
-//				}
-//			}
-//	
-//			s = new Sonido(colorpixel);
+
+						}
+					}
+				}
+			}
+
+			ganador=0;
+			pixelesAnalizados=0;
+			
+			for(int i=0;i<12;i++){
+				pixelesAnalizados+=contador[i];
+				if(contador[i]>ganador){
+					ganador=contador[i];
+					colorpixel=i;
+				}
+			}
+	
+			s = new Sonido(colorpixel);
 
 		    	
 
