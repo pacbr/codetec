@@ -23,10 +23,15 @@ public class DetectorMediana {
 	int ganador;
 	Sonido s;
 	BufferedImage imagenCuantizada2;
+	BufferedImage imagenOriginal;
 	int contador[];
 	
 	public BufferedImage getImagenCuantizada(){
 		return imagenCuantizada2;
+	}
+
+	public BufferedImage getImagenOriginal(){
+		return imagenOriginal;
 	}
 	
 	public int[] getContadorPixeles(){
@@ -41,7 +46,7 @@ public class DetectorMediana {
 	public JLabel ejecuta(String ruta){
 		 
 		// Variables locales
-		BufferedImage img;
+		
 		BufferedImage imgAclarada;
 		BufferedImage imgMediana;
 		JLabel lblDetecta;
@@ -50,11 +55,11 @@ public class DetectorMediana {
 		Aclarador aclarador;
 		Filtros fil;
 		try {
-			img = ImageIO.read( new File (ruta));
+			imagenOriginal = ImageIO.read( new File (ruta));
 			
 			
-			int ancho = img.getWidth();
-			int alto = img.getHeight(null);
+			int ancho = imagenOriginal.getWidth();
+			int alto = imagenOriginal.getHeight(null);
 
 			seg = new Segmentacion(ancho,alto);
 			aclarador = new Aclarador();
@@ -78,7 +83,7 @@ public class DetectorMediana {
 			
 			
 
-			imgMediana = seg.filtroMediana(img);
+			imgMediana = seg.filtroMediana(imagenOriginal);
 			
 			imgAclarada = aclarador.aclara(imgMediana);
 		

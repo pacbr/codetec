@@ -24,10 +24,15 @@ public class Detector {
 	int ganador;
 	Sonido s;
 	BufferedImage imagenCuantizada2;
+	BufferedImage imagenOriginal;
 	int contador[];
 	
 	public BufferedImage getImagenCuantizada(){
 		return imagenCuantizada2;
+	}
+	
+	public BufferedImage getImagenOriginal(){
+		return imagenOriginal;
 	}
 	
 	public int[] getContadorPixeles(){
@@ -42,25 +47,25 @@ public class Detector {
 	public JLabel ejecuta(String ruta){
 		 
 		// Variables locales
-		BufferedImage img;
+		
 		BufferedImage imgAclarada;
 		BufferedImage imgErosion;
-		BufferedImage imgSegmentacion;
-		Grafico g;
-		Grafico g1;
-		Grafico g2;
-		Grafico g3;
+//		BufferedImage imgSegmentacion;
+//		Grafico g;
+//		Grafico g1;
+//		Grafico g2;
+//		Grafico g3;
 		JLabel lblDetecta;
 		Colores color;
 		Segmentacion seg;
 		Aclarador aclarador;
 		Filtros fil;
 		try {
-			img = ImageIO.read( new File (ruta));
+			imagenOriginal = ImageIO.read( new File (ruta));
 			
 			
-			int ancho = img.getWidth();
-			int alto = img.getHeight(null);
+			int ancho = imagenOriginal.getWidth();
+			int alto = imagenOriginal.getHeight(null);
 
 			seg = new Segmentacion(ancho,alto);
 			aclarador = new Aclarador();
@@ -86,7 +91,7 @@ public class Detector {
 //			img=seg.escalaDeGrises(img);
 //			imgFinal = seg.filtroMedia(img);
 			
-			imgErosion = fil.erode(img); 
+			imgErosion = fil.erode(imagenOriginal); 
 //			imgErosion = fil.dilate(imgErosion); 
 			
 			imgAclarada = aclarador.aclara(imgErosion);
