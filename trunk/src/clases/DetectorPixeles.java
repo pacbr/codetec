@@ -22,7 +22,8 @@ public class DetectorPixeles extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	BufferedImage image;
-    JLabel left;
+	BufferedImage imagenOriginal;
+    JPanel left;
     JPanel right;
     private JButton botones[];
     Colores c = new Colores();
@@ -30,11 +31,16 @@ public class DetectorPixeles extends JFrame{
     Map<Integer, String> coloresMap;
     JPanel panelBajo = new JPanel();
     CardLayout esqueInf = new CardLayout();
+    CardLayout esqueImagenes = new CardLayout();
     Box caja;
     JPanel panelColores;
-    public DetectorPixeles(BufferedImage imagenCuantizada){
+    JButton cambiaImagen;
+    
+    public DetectorPixeles(BufferedImage imagenCuantizada, BufferedImage imagenOriginal){
+    	
     	panelBajo.setLayout(esqueInf);
     	image = imagenCuantizada;
+    	this.imagenOriginal = imagenOriginal;
     	coloresMap = new Colores().getColoresMap();
     }
 	
@@ -54,6 +60,7 @@ public class DetectorPixeles extends JFrame{
 		gbc.weightx = 1.0;//Para que se estire la fila al estirar la ventana
 		panel.add(left, gbc);
 		panel.add(right, gbc);
+		esqueImagenes.show(left,"imagenCuantizada");
 		return panel;
 	}
 
@@ -67,7 +74,7 @@ public class DetectorPixeles extends JFrame{
 		p = p.replaceAll("%", "");
 //		System.out.println(p);
 		JPanel jpBarra = new JPanel();
-		float numFloat = Float.parseFloat(p);
+//		float numFloat = Float.parseFloat(p);
 //		if(numFloat>0.0)
 //		b.setPreferredSize(new Dimension((15+(int)Float.parseFloat(p)*130/100),20));
 //		b.setPreferredSize(new Dimension(93,20));
@@ -131,19 +138,45 @@ public class DetectorPixeles extends JFrame{
 			//    	   titulo.setFont(new Font(auxFont.getFontName(), auxFont.getStyle(), 20));
 			caja.add(panelBajo);
 			contenido.add(caja);
+			
+			
+			cambiaImagen = new JButton("Imagen original");
+			ActionListener actionListener2 = new ActionListener() {
+			
+		      public void actionPerformed(ActionEvent actionEvent) {
+		    	 
+		    	  if(cambiaImagen.getText()=="Imagen original"){
+		    		  esqueImagenes.show(left,"imagenOriginal");
+		    		  cambiaImagen.setText("Imagen cuantizada");
+		    		  
+		    	  }
+		    	  else{
+		    		  esqueImagenes.show(left,"imagenCuantizada");
+		    		  cambiaImagen.setText("Imagen original");
+		    	  }
+		      }
+		    };
+			cambiaImagen.addActionListener(actionListener2);
+		    right.add(cambiaImagen);
 			right.add(contenido);
 			return right;
 		}
     
     
-	private JLabel getLeft() {
+	private JPanel getLeft() {
 //		try {
 //			image = ImageIO.read( new File ("D:/Musica/Paco/imagenesCodetec/img2.jpg"));
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
 //		return new JLabel(new ImageIcon(image), JLabel.CENTER);
-		return new JLabel(new ImageIcon(image), JLabel.CENTER);
+		JPanel jpleft = new JPanel();
+		JLabel jlbleft = new JLabel(new ImageIcon(image), JLabel.CENTER);
+		JLabel jlbleft2 = new JLabel(new ImageIcon(imagenOriginal), JLabel.CENTER);
+		jpleft.setLayout(esqueImagenes);
+		jpleft.add("imagenCuantizada",jlbleft);
+		jpleft.add("imagenOriginal",jlbleft2);
+		return jpleft;
 	}
 
 //	public static void main(String[] args) {
@@ -159,7 +192,7 @@ public class DetectorPixeles extends JFrame{
 
 class PointSelector extends MouseAdapter{
 	DetectorPixeles view;
-	JLabel target;
+	JPanel target;
 	JPanel targetRight;
 	JPanel panelBajo;
 	CardLayout esqueInf;

@@ -90,13 +90,15 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
  
  public JLabel detectaColor(Detector detector){
 	 BufferedImage imagenCuantizada;
+	 BufferedImage imagenOriginal;
 	 JLabel jl = detector.ejecuta(ruta);
 	 imagenCuantizada=detector.getImagenCuantizada();
+	 imagenOriginal=detector.getImagenOriginal();
 	 int contador[]=detector.getContadorPixeles();
 	 int pixelesAnalizados = detector.getPixelesAnalizados();
 	 
-	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada);
-     JFrame f = new JFrame("Imagen");
+	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
+     JFrame f = new JFrame("Erosion");
      
 //     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      JPanel nuevoJPanel = detPix.getContent();
@@ -125,13 +127,15 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
  public JLabel detectaColorMedia(DetectorMedia detectorMedia){
 	 
 	 BufferedImage imagenCuantizada;
+	 BufferedImage imagenOriginal;
 	 JLabel jl = detectorMedia.ejecuta(ruta);
 	 imagenCuantizada=detectorMedia.getImagenCuantizada();
+	 imagenOriginal=detectorMedia.getImagenOriginal();
 	 int contador[]=detectorMedia.getContadorPixeles();
 	 int pixelesAnalizados = detectorMedia.getPixelesAnalizados();
 	 
-	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada);
-     JFrame f = new JFrame("Imagen");
+	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
+     JFrame f = new JFrame("Media");
      
 //     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      JPanel nuevoJPanel = detPix.getContent();
@@ -160,13 +164,15 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
  public JLabel detectaColorMediana(DetectorMediana detectorMediana){
 	 
 	 BufferedImage imagenCuantizada;
+	 BufferedImage imagenOriginal;
 	 JLabel jl = detectorMediana.ejecuta(ruta);
 	 imagenCuantizada=detectorMediana.getImagenCuantizada();
+	 imagenOriginal=detectorMediana.getImagenOriginal();
 	 int contador[]=detectorMediana.getContadorPixeles();
 	 int pixelesAnalizados = detectorMediana.getPixelesAnalizados();
 	 
-	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada);
-     JFrame f = new JFrame("Imagen");
+	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
+     JFrame f = new JFrame("Mediana");
      
 //     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      JPanel nuevoJPanel = detPix.getContent();
