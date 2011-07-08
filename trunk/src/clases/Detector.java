@@ -22,10 +22,44 @@ public class Detector {
 	Integer colorpixel = null;
 	int pixelesAnalizados;
 	int ganador;
-	Sonido s;
-	BufferedImage imagenCuantizada2;
+	
+	JLabel lblDetecta;
+	Colores color;
+	Segmentacion seg;
+	Aclarador aclarador;
+	Filtros fil;
+	int value;
+	
+	
 	BufferedImage imagenOriginal;
+	
+	int ancho;
+	int alto;
+	
+	BufferedImage imgErosion;
+	BufferedImage imgAclarada;
+	BufferedImage imagenCuantizada2;
+	
+	Map<Integer,List<Pixel>> mapa;
+	Sonido s;
+	
+	
 	int contador[];
+	
+	public Detector(){
+		
+		
+		
+		aclarador = new Aclarador();
+		rgbs = new int[3];
+		hsb = new float[3];
+		color = new Colores();
+		contador = new int[12];
+		for(int i=0;i<12;i++){
+			contador[i] = 0;
+		}
+	}
+	
 	
 	public BufferedImage getImagenCuantizada(){
 		return imagenCuantizada2;
@@ -33,6 +67,14 @@ public class Detector {
 	
 	public BufferedImage getImagenOriginal(){
 		return imagenOriginal;
+	}
+	
+	public BufferedImage getImagenErosion(){
+		return imgErosion;
+	}
+	
+	public BufferedImage getImagenAclarada(){
+		return imgAclarada;
 	}
 	
 	public int[] getContadorPixeles(){
@@ -43,129 +85,61 @@ public class Detector {
 		return pixelesAnalizados;
 	}
 	
+	public Map<Integer,List<Pixel>> getMapa(){
+		return mapa;
+	}
 	
-	public JLabel ejecuta(String ruta){
-		 
-		// Variables locales
-		
-		BufferedImage imgAclarada;
-		BufferedImage imgErosion;
-//		BufferedImage imgSegmentacion;
-//		Grafico g;
-//		Grafico g1;
-//		Grafico g2;
-//		Grafico g3;
-		JLabel lblDetecta;
-		Colores color;
-		Segmentacion seg;
-		Aclarador aclarador;
-		Filtros fil;
+	public void obtenerImagen(String ruta){
 		try {
 			imagenOriginal = ImageIO.read( new File (ruta));
 			
-			
-			int ancho = imagenOriginal.getWidth();
-			int alto = imagenOriginal.getHeight(null);
-
-			seg = new Segmentacion(ancho,alto);
-			aclarador = new Aclarador();
-			fil = new Filtros(ancho, alto);
-			
-			rgbs = new int[3];
-			int value;
-			hsb = new float[3];
-
-			color = new Colores();
-			
-			
-			contador = new int[12];
-
-			for(int i=0;i<12;i++){
-				contador[i] = 0;
-			}
-			
-			
-			
-			
-			
-//			img=seg.escalaDeGrises(img);
-//			imgFinal = seg.filtroMedia(img);
-			
-			imgErosion = fil.erode(imagenOriginal); 
-//			imgErosion = fil.dilate(imgErosion); 
-			
-			imgAclarada = aclarador.aclara(imgErosion);
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-			imagenCuantizada2 = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
-			Map<Integer,List<Pixel>> mapa = Segmentacion.segmentaFinal(imgAclarada, imagenCuantizada2);
-			
-//			ImageIcon imagenmuestra1 = new ImageIcon(img);
-//			JLabel etiqueta1 = new JLabel(imagenmuestra1);
-//			g1 = new Grafico(etiqueta1);
-//			g1.show();
-				
-			
-			
-//			
-//			ImageIcon imagenmuestra2 = new ImageIcon(imgErosion);
-//			JLabel etiqueta2 = new JLabel(imagenmuestra2);
-//			g2 = new Grafico(etiqueta2, "Erosion");
-//			g2.show();
-//			
-//			ImageIcon imagenmuestra1 = new ImageIcon(imgAclarada);
-//			JLabel etiqueta1 = new JLabel(imagenmuestra1);
-//			g = new Grafico(etiqueta1, "Aclarado");
-//			g.show();
-//			
-//			ImageIcon imagenmuestra3 = new ImageIcon(imagenCuantizada);
-//			JLabel etiqueta3 = new JLabel(imagenmuestra3);
-//			g3 = new Grafico(etiqueta3, "Segmentacion");
-//			g3.show();
-			
-			int wAclarada = imgAclarada.getWidth();
-			int hAclarada = imgAclarada.getHeight(null);
-			for(int i=1; i<wAclarada; i++){
-				if(i%21==0){
-					for(int j=1; j<hAclarada;j++){
-						if(j%21==0){
-							
-							value =  imgAclarada.getRGB(i,j);
-							rgbs = Colores.obtieneRGB(value);
-							Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
-							colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
-							contador[colorpixel]++;
-
-
-						}
+		ancho = imagenOriginal.getWidth();
+		alto = imagenOriginal.getHeight(null);
+	}
+	
+	public JLabel ejecutaErosion(String ruta){
+		obtenerImagen(ruta);
+		imagenCuantizada2 = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
+		seg = new Segmentacion(ancho,alto);
+		fil = new Filtros(ancho, alto);
+		imgErosion = fil.erode(imagenOriginal);
+		
+//			imgErosion = fil.dilate(imgErosion); 
+		
+		imgAclarada = aclarador.aclara(imgErosion);
+		mapa = Segmentacion.segmentaFinal(imgAclarada, imagenCuantizada2);
+		for(int i=1; i<ancho; i++){
+			if(i%21==0){
+				for(int j=1; j<alto;j++){
+					if(j%21==0){
+						value =  imgAclarada.getRGB(i,j);
+						rgbs = Colores.obtieneRGB(value);
+						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
+						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
+						contador[colorpixel]++;
 					}
 				}
 			}
+		}
 
-			ganador=0;
-			pixelesAnalizados=0;
+		ganador=0;
+		pixelesAnalizados=0;
 			
-			for(int i=0;i<12;i++){
-				pixelesAnalizados+=contador[i];
-				if(contador[i]>ganador){
-					ganador=contador[i];
-					colorpixel=i;
-				}
+		for(int i=0;i<12;i++){
+			pixelesAnalizados+=contador[i];
+			if(contador[i]>ganador){
+				ganador=contador[i];
+				colorpixel=i;
 			}
-	
-			s = new Sonido(colorpixel);
+		}
+		s = new Sonido(colorpixel);
 
 		    	
-			/////
 			
-//			DetectorPixeles test = new DetectorPixeles();
-//	        JFrame f = new JFrame("Imagen");
-////	        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	        f.add(test.getContent());
-//	        f.pack();
-//	        f.setLocationRelativeTo(null);
-//	        f.setVisible(true);
-			////
-				
 				
 				
 //				BufferedImage imgb;
@@ -197,9 +171,86 @@ public class Detector {
 //				g.show();
 				
 			
-		} catch (IOException e) {
-			e.printStackTrace();
+		
+		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
+	}
+	
+	
+	public JLabel ejecutaMedia(String ruta){
+		obtenerImagen(ruta);
+		imagenCuantizada2 = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
+		seg = new Segmentacion(ancho,alto);
+		fil = new Filtros(ancho, alto);
+		BufferedImage imgMedia;
+		
+		imgMedia = seg.filtroMedia(imagenOriginal);
+		imgAclarada = aclarador.aclara(imgMedia);
+		mapa = Segmentacion.segmentaFinal(imgAclarada, imagenCuantizada2);
+
+		for(int i=1; i<ancho; i++){
+			if(i%21==0){
+				for(int j=1; j<alto;j++){
+					if(j%21==0){
+						value =  imgAclarada.getRGB(i,j);
+						rgbs = Colores.obtieneRGB(value);
+						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
+						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
+						contador[colorpixel]++;
+					}
+				}
+			}
 		}
+
+		ganador=0;
+		pixelesAnalizados=0;
+			
+		for(int i=0;i<12;i++){
+			pixelesAnalizados+=contador[i];
+			if(contador[i]>ganador){
+				ganador=contador[i];
+				colorpixel=i;
+			}
+		}
+		s = new Sonido(colorpixel);
+		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
+	}
+	
+	
+	public JLabel ejecutaMediana(String ruta){
+		obtenerImagen(ruta);
+		imagenCuantizada2 = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
+		seg = new Segmentacion(ancho,alto);
+		fil = new Filtros(ancho, alto);
+		BufferedImage imgMediana;
+			
+		imgMediana = seg.filtroMediana(imagenOriginal);
+		imgAclarada = aclarador.aclara(imgMediana);
+		mapa = Segmentacion.segmentaFinal(imgAclarada, imagenCuantizada2);
+		for(int i=1; i<ancho; i++){
+			if(i%21==0){
+				for(int j=1; j<alto;j++){
+					if(j%21==0){
+						value =  imgAclarada.getRGB(i,j);
+						rgbs = Colores.obtieneRGB(value);
+						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
+						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
+						contador[colorpixel]++;
+					}
+				}
+			}
+		}
+
+		ganador=0;
+		pixelesAnalizados=0;
+				
+		for(int i=0;i<12;i++){
+			pixelesAnalizados+=contador[i];
+			if(contador[i]>ganador){
+				ganador=contador[i];
+				colorpixel=i;
+			}
+		}
+		s = new Sonido(colorpixel);
 		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
 	}
 	

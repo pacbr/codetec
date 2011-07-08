@@ -16,15 +16,15 @@ public class Controlador implements ActionListener, ChangeListener{
 	ManejadorDeImagenes manejador;
 	PanelSwing panel;
 	Detector detector;
-	DetectorMedia detectorMedia;
-	DetectorMediana detectorMediana;
+	Detector detectorMedia;
+	Detector detectorMediana;
  
 	public Controlador(PanelSwing panel) {
 		this.panel = panel;
 		manejador = new ManejadorDeImagenes();
 		detector = new Detector();
-		detectorMedia = new DetectorMedia();
-		detectorMediana = new DetectorMediana();
+		detectorMedia = new Detector();
+		detectorMediana = new Detector();
 	}
 
 	// @Desc Método que capturará los eventos ocurridos en el menú principal del sistema
