@@ -54,7 +54,7 @@ public class DetectorPixeles extends JFrame{
 		new PointSelector(this);
 		//        right.setPreferredSize(left.getPreferredSize().);
 		JPanel panel = new JPanel(new GridBagLayout());
-		panel.setBackground(Color.black);
+		panel.setBackground(Color.gray);
 		gbc = new GridBagConstraints();
 //		gbc.insets = new Insets(2,2,2,2);//Agrega espacios
 		gbc.weightx = 1.0;//Para que se estire la fila al estirar la ventana

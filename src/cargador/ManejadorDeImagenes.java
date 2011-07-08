@@ -91,7 +91,7 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
  public JLabel detectaColor(Detector detector){
 	 BufferedImage imagenCuantizada;
 	 BufferedImage imagenOriginal;
-	 JLabel jl = detector.ejecuta(ruta);
+	 JLabel jl = detector.ejecutaErosion(ruta);
 	 imagenCuantizada=detector.getImagenCuantizada();
 	 imagenOriginal=detector.getImagenOriginal();
 	 int contador[]=detector.getContadorPixeles();
@@ -124,11 +124,11 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 
  }
  
- public JLabel detectaColorMedia(DetectorMedia detectorMedia){
+ public JLabel detectaColorMedia(Detector detectorMedia){
 	 
 	 BufferedImage imagenCuantizada;
 	 BufferedImage imagenOriginal;
-	 JLabel jl = detectorMedia.ejecuta(ruta);
+	 JLabel jl = detectorMedia.ejecutaMedia(ruta);
 	 imagenCuantizada=detectorMedia.getImagenCuantizada();
 	 imagenOriginal=detectorMedia.getImagenOriginal();
 	 int contador[]=detectorMedia.getContadorPixeles();
@@ -161,11 +161,11 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 //	 c.imprimeConfirmacion();
  }
  
- public JLabel detectaColorMediana(DetectorMediana detectorMediana){
+ public JLabel detectaColorMediana(Detector detectorMediana){
 	 
 	 BufferedImage imagenCuantizada;
 	 BufferedImage imagenOriginal;
-	 JLabel jl = detectorMediana.ejecuta(ruta);
+	 JLabel jl = detectorMediana.ejecutaMediana(ruta);
 	 imagenCuantizada=detectorMediana.getImagenCuantizada();
 	 imagenOriginal=detectorMediana.getImagenOriginal();
 	 int contador[]=detectorMediana.getContadorPixeles();
