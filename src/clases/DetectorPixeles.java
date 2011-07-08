@@ -56,7 +56,7 @@ public class DetectorPixeles extends JFrame{
 		JPanel panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.black);
 		gbc = new GridBagConstraints();
-		gbc.insets = new Insets(5,5,5,5);//Agrega espacios
+//		gbc.insets = new Insets(2,2,2,2);//Agrega espacios
 		gbc.weightx = 1.0;//Para que se estire la fila al estirar la ventana
 		panel.add(left, gbc);
 		panel.add(right, gbc);
@@ -89,9 +89,13 @@ public class DetectorPixeles extends JFrame{
 	
     private JPanel getRight(){
     	JPanel right = new JPanel();
-		right.setSize(100, image.getHeight());
+    	int altoPanel = left.getPreferredSize().height;
+    	if (altoPanel < 480)
+    		right.setPreferredSize(new Dimension(280, 480));
+    	else
+    		right.setPreferredSize(new Dimension(280, altoPanel));
 		Container contenido=getContentPane(); 
-		contenido.setLayout(new FlowLayout()); 
+//		contenido.setLayout(new FlowLayout()); 
 		caja = Box.createVerticalBox();
 		botones = new JButton[ 12 ];
 		ActionListener actionListener = new ActionListener() {
@@ -125,7 +129,6 @@ public class DetectorPixeles extends JFrame{
 			botones[cuenta].setBackground(new Color(c.colorAHexadecimal(cuenta)));
 			
 			panelColores.add(botones[cuenta]);
-//			panelColores.add(new JLabel("Inicio"));
 			caja.add(panelColores);
 		}
 			panelBajo.setBackground(Color.gray);
@@ -157,7 +160,7 @@ public class DetectorPixeles extends JFrame{
 		      }
 		    };
 			cambiaImagen.addActionListener(actionListener2);
-		    right.add(cambiaImagen);
+		    contenido.add(cambiaImagen,BorderLayout.NORTH);
 			right.add(contenido);
 			return right;
 		}
