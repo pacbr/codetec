@@ -88,9 +88,11 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
  
  ////////////////////
  
- public JLabel detectaColor(Detector detector){
+ public JLabel detectaColorErosion(){
 	 BufferedImage imagenCuantizada;
 	 BufferedImage imagenOriginal;
+	 Detector detector = new Detector();
+		
 	 JLabel jl = detector.ejecutaErosion(ruta);
 	 imagenCuantizada=detector.getImagenCuantizada();
 	 imagenOriginal=detector.getImagenOriginal();
@@ -98,16 +100,8 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 int pixelesAnalizados = detector.getPixelesAnalizados();
 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
-     JFrame f = new JFrame("Erosion");
-     
-//     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     JPanel nuevoJPanel = detPix.getContent();
-     f.add(nuevoJPanel);
-     f.pack();
-     f.setLocationRelativeTo(null);
-     f.setVisible(true);
-	 
-     
+
+	 cargaFrameDetectorPixeles(detPix, "Erosion");
 
 	 DecimalFormat formateador = new DecimalFormat("####.#%");
 	 String porcentaje;
@@ -124,8 +118,9 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 
  }
  
- public JLabel detectaColorMedia(Detector detectorMedia){
-	 
+ public JLabel detectaColorMedia(){
+	 Detector detectorMedia = new Detector();
+		
 	 BufferedImage imagenCuantizada;
 	 BufferedImage imagenOriginal;
 	 JLabel jl = detectorMedia.ejecutaMedia(ruta);
@@ -135,16 +130,8 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 int pixelesAnalizados = detectorMedia.getPixelesAnalizados();
 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
-     JFrame f = new JFrame("Media");
      
-//     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     JPanel nuevoJPanel = detPix.getContent();
-     f.add(nuevoJPanel);
-     f.pack();
-     f.setLocationRelativeTo(null);
-     f.setVisible(true);
-	 
-     
+	 cargaFrameDetectorPixeles(detPix, "Media");
 
 	 DecimalFormat formateador = new DecimalFormat("####.#%");
 	 String porcentaje;
@@ -161,8 +148,8 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 //	 c.imprimeConfirmacion();
  }
  
- public JLabel detectaColorMediana(Detector detectorMediana){
-	 
+ public JLabel detectaColorMediana(){
+	 Detector detectorMediana = new Detector();
 	 BufferedImage imagenCuantizada;
 	 BufferedImage imagenOriginal;
 	 JLabel jl = detectorMediana.ejecutaMediana(ruta);
@@ -172,17 +159,9 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 int pixelesAnalizados = detectorMediana.getPixelesAnalizados();
 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
-     JFrame f = new JFrame("Mediana");
      
-//     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     JPanel nuevoJPanel = detPix.getContent();
-     f.add(nuevoJPanel);
-     f.pack();
-     f.setLocationRelativeTo(null);
-     f.setVisible(true);
-	 
+	 cargaFrameDetectorPixeles(detPix, "Mediana");
      
-
 	 DecimalFormat formateador = new DecimalFormat("####.#%");
 	 String porcentaje;
 	 for(int i=0;i<contador.length;i++){
@@ -195,9 +174,121 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
      
 	 return jl;
 	 
-//	 c.imprimeConfirmacion();
+
  }
  
+ public JLabel detectaColorApertura(){
+	 Detector detectorApertura = new Detector();
+	 BufferedImage imagenCuantizada;
+	 BufferedImage imagenOriginal;
+	 JLabel jl = detectorApertura.ejecutaApertura(ruta);
+	 imagenCuantizada=detectorApertura.getImagenCuantizada();
+	 imagenOriginal=detectorApertura.getImagenOriginal();
+	 int contador[]=detectorApertura.getContadorPixeles();
+	 int pixelesAnalizados = detectorApertura.getPixelesAnalizados();
+	 
+	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
+     
+	 cargaFrameDetectorPixeles(detPix, "Apertura");
+     
+	 DecimalFormat formateador = new DecimalFormat("####.#%");
+	 String porcentaje;
+	 for(int i=0;i<contador.length;i++){
+		 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
+		 detPix.setPorcentaje(i,porcentaje);
+
+	 }
+     
+     
+     
+	 return jl;
+	 
+
+ }
+ 
+ public JLabel detectaColorCierre(){
+	 Detector detectorCierre = new Detector();
+	 BufferedImage imagenCuantizada;
+	 BufferedImage imagenOriginal;
+	 JLabel jl = detectorCierre.ejecutaCierre(ruta);
+	 imagenCuantizada=detectorCierre.getImagenCuantizada();
+	 imagenOriginal=detectorCierre.getImagenOriginal();
+	 int contador[]=detectorCierre.getContadorPixeles();
+	 int pixelesAnalizados = detectorCierre.getPixelesAnalizados();
+	 
+	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
+     
+	 cargaFrameDetectorPixeles(detPix, "Cierre");
+     
+	 DecimalFormat formateador = new DecimalFormat("####.#%");
+	 String porcentaje;
+	 for(int i=0;i<contador.length;i++){
+		 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
+		 detPix.setPorcentaje(i,porcentaje);
+
+	 }
+     
+     
+     
+	 return jl;
+	 
+
+ }
+ 
+ public JLabel detectaColorPasoAPaso(){
+	 Detector detectorPasoAPaso = new Detector();
+	 BufferedImage imagenOriginal;
+	 BufferedImage imagenErosionada;
+	 BufferedImage imagenAclarada;
+	 BufferedImage imagenCuantizada;
+	 
+	 
+	 detectorPasoAPaso.ejecutaPasoAPaso1Erosion(ruta);
+	 detectorPasoAPaso.ejecutaPasoAPaso2Aclarado(ruta);
+	 JLabel jl = detectorPasoAPaso.ejecutaPasoAPaso3SegmentadoCuantizado(ruta);
+	 
+	 imagenOriginal=detectorPasoAPaso.getImagenOriginal();
+	 imagenErosionada=detectorPasoAPaso.getImagenErosion();
+	 imagenAclarada=detectorPasoAPaso.getImagenAclarada();
+	 imagenCuantizada=detectorPasoAPaso.getImagenCuantizada();
+	 
+	 int contador[]=detectorPasoAPaso.getContadorPixeles();
+	 int pixelesAnalizados = detectorPasoAPaso.getPixelesAnalizados();
+	 
+	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
+     
+	 cargaFrameDetectorPixeles(detPix, "Paso a paso");
+     
+	 DecimalFormat formateador = new DecimalFormat("####.#%");
+	 String porcentaje;
+	 for(int i=0;i<contador.length;i++){
+		 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
+		 detPix.setPorcentaje(i,porcentaje);
+
+	 }
+     
+     
+     
+	 return jl;
+	 
+
+ }
+ 
+ public void cargaFrameDetectorPixeles(DetectorPixeles dp, String nombreDelFrame){
+	 JFrame f = new JFrame(nombreDelFrame);
+     
+//   f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	 JPanel nuevoJPanel = dp.getContent();
+	 f.add(nuevoJPanel);
+	 f.pack();
+	 f.setLocationRelativeTo(null);
+	 f.setVisible(true);
+ }
+ 
+ 
+ public void cargaAyuda(){
+	 System.out.println("AYUDA");
+ }
  //////////////
  
  

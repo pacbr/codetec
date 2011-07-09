@@ -11,7 +11,7 @@ import javax.swing.event.ChangeListener;
  String nombreArchivo, ruta;
  JMenuBar barraMenu;
  JMenu menuArchivo, menuFiltros, menuDetecta;
- JMenuItem abrir, abrir2, guardar, salir,detectaMedia,detectaMediana, detecta1, detecta, ayuda;
+ JMenuItem abrir, abrir2, guardar, salir, detectaErosion, detectaMedia, detectaMediana, detectaApertura, detectaCierre, detectaPasoAPaso, ayuda;
  JScrollPane panelDespl;
  JPanel panelBajo, panelDetecta, panelColor, panelVacio;
  int altura = 80;
@@ -43,21 +43,22 @@ import javax.swing.event.ChangeListener;
   salir = menuArchivo.add("Salir");   
   barraMenu.add(menuArchivo);
   
-  
+  detectaErosion = menuFiltros.add("Erosión");
   detectaMedia = menuFiltros.add("Media");
   detectaMediana = menuFiltros.add("Mediana");
+  menuFiltros.addSeparator();
+  detectaApertura = menuFiltros.add("Apertura");
+  detectaCierre = menuFiltros.add("Cierre");
+  detectaErosion.setEnabled(false);
   detectaMedia.setEnabled(false);
   detectaMediana.setEnabled(false);
+  detectaApertura.setEnabled(false);
+  detectaCierre.setEnabled(false);
   barraMenu.add(menuFiltros);
   
-  
-
-  detecta = menuArchivo.add("Detecta");
-
-  detecta.setEnabled(false);
-
-  barraMenu.add(detecta); //PARA AGREGAR JMENUITEM HAY QUE TOCAR TB EN LAS CLASES EDITORIMG y CONTROLADOR
-  
+  detectaPasoAPaso = menuFiltros.add("Paso a paso (Erosión)");
+  detectaPasoAPaso.setEnabled(false);
+  barraMenu.add(detectaPasoAPaso); //PARA AGREGAR JMENUITEM HAY QUE TOCAR TB EN LAS CLASES EDITORIMG y CONTROLADOR
   
 //  detectaMedia = menuArchivo.add("Media");
 //detectaMedia.setEnabled(false);
