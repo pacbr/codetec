@@ -41,10 +41,15 @@ public class EditorImg extends JFrame{
 		panel.abrir.addActionListener(controlador);
 		panel.guardar.addActionListener(controlador);
 		panel.salir.addActionListener(controlador);
-		panel.salir.addActionListener(controlador);
-		panel.detecta.addActionListener(controlador);
+		
+		panel.detectaErosion.addActionListener(controlador);
 		panel.detectaMedia.addActionListener(controlador);
 		panel.detectaMediana.addActionListener(controlador);
+		panel.detectaApertura.addActionListener(controlador);
+		panel.detectaCierre.addActionListener(controlador);
+		panel.detectaPasoAPaso.addActionListener(controlador);
+		
+		panel.ayuda.addActionListener(controlador);
 		
 		contentPane.add(panel);
 	}
