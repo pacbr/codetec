@@ -336,30 +336,6 @@ public class Detector {
 		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
 	}
 
-
-	public JLabel ejecutaPasoAPaso1Erosion(String ruta) {
-		// TODO Auto-generated method stub
-		System.out.println("Si ejecutaPasoAPaso1");
-
-
-		return null;
-	}
-	
-	public JLabel ejecutaPasoAPaso2Aclarado(String ruta) {
-		// TODO Auto-generated method stub
-		System.out.println("Si ejecutaPasoAPaso2");
-
-
-		return null;
-	}
-	
-	public JLabel ejecutaPasoAPaso3SegmentadoCuantizado(String ruta) {
-		// TODO Auto-generated method stub
-		System.out.println("Si ejecutaPasoAPaso3");
-
-
-		return null;
-	}
 	
 }
 	
