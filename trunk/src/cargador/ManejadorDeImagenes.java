@@ -18,6 +18,7 @@ import clases.DetectorMedia;
 import clases.DetectorMediana;
 import clases.DetectorPixeles;
 import clases.Grafico;
+import clases.GraficoPasos;
 /*@Desc Clase del nivel de la capa de negocios. Implementa las operaciones que son llamadas desde el Controlador de la aplicación
  * para poder cargar las imagenes, alamacenarlas y modificaralas, apoyandose en un objeto la clase de más bajo nivel, es decir ProcesadorDeImagenes 
  */
@@ -237,38 +238,9 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
  
  public JLabel detectaColorPasoAPaso(){
 	 Detector detectorPasoAPaso = new Detector();
-	 BufferedImage imagenOriginal;
-	 BufferedImage imagenErosionada;
-	 BufferedImage imagenAclarada;
-	 BufferedImage imagenCuantizada;
+	 JLabel jl = detectorPasoAPaso.ejecutaErosion(ruta);
+	 GraficoPasos gp = new GraficoPasos(detectorPasoAPaso, this);
 	 
-	 
-	 detectorPasoAPaso.ejecutaPasoAPaso1Erosion(ruta);
-	 detectorPasoAPaso.ejecutaPasoAPaso2Aclarado(ruta);
-	 JLabel jl = detectorPasoAPaso.ejecutaPasoAPaso3SegmentadoCuantizado(ruta);
-	 
-	 imagenOriginal=detectorPasoAPaso.getImagenOriginal();
-	 imagenErosionada=detectorPasoAPaso.getImagenErosion();
-	 imagenAclarada=detectorPasoAPaso.getImagenAclarada();
-	 imagenCuantizada=detectorPasoAPaso.getImagenCuantizada();
-	 
-	 int contador[]=detectorPasoAPaso.getContadorPixeles();
-	 int pixelesAnalizados = detectorPasoAPaso.getPixelesAnalizados();
-	 
-	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
-     
-	 cargaFrameDetectorPixeles(detPix, "Paso a paso");
-     
-	 DecimalFormat formateador = new DecimalFormat("####.#%");
-	 String porcentaje;
-	 for(int i=0;i<contador.length;i++){
-		 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
-		 detPix.setPorcentaje(i,porcentaje);
-
-	 }
-     
-     
-     
 	 return jl;
 	 
 
