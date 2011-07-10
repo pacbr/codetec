@@ -29,14 +29,15 @@ public class Grafico extends JFrame{
 		et2 = jletiqueta;
 		timer = new Timer (300, new ActionListener ());
 
-		this.setSize(700, 700);
-		this.setLocationRelativeTo(null);
 		esqueGris = new CardLayout();
 		setLayout(esqueGris);
 		getContentPane().add("jlabel1",et1);
 		getContentPane().add("jlabel2",et2);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		show();
+		
+		this.pack();
+		this.setLocationRelativeTo(null);
+	 	this.setVisible(true);
 		
 		new PointSelector(this);
 	}
