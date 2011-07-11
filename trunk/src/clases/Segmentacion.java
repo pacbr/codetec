@@ -16,7 +16,7 @@ public class Segmentacion {
 	private BufferedImage ImagenOriginal;
 	 
 	private int color[];
- 
+	Colores colores;
  
 	public Segmentacion(int ancho , int alto) {
        
@@ -79,14 +79,23 @@ public class Segmentacion {
 	public BufferedImage escalaDeGrisesConColor(BufferedImage imagen, BufferedImage imagenGrisClaro, int color){
 		int w = imagen.getWidth();
 		int h = imagen.getHeight(null);
-		Colores colores = new Colores();
+		Integer colorPintar= color;
+		colores = new Colores();
 		BufferedImage imagenRGB=new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-		
+		if(colores.obtieneNumeroColor("Negro")==color){
+			colorPintar = colores.obtieneNumeroColor("Blanco");
+		}
+		else if(colores.obtieneNumeroColor("Blanco")==color){
+			colorPintar = colores.obtieneNumeroColor("Negro");
+		}
+		else if(colores.obtieneNumeroColor("Gris")==color){
+			colorPintar = colores.obtieneNumeroColor("Negro");
+		}
 		for(int c=0;c<w;c++){
 			for(int r=0;r<h;r++){
 				if(colores.obtieneColor(imagen.getRGB(c, r)) == color){
 //					System.out.println(colores.obtieneColor(imgg.getRGB(c, r)));
-					imagenRGB.setRGB(c, r, new Colores().colorAHexadecimal(color));
+					imagenRGB.setRGB(c, r, new Colores().colorAHexadecimal(colorPintar));
 					
 				}else
 					imagenRGB.setRGB(c, r, imagenGrisClaro.getRGB(c,r));
