@@ -111,7 +111,7 @@ panelDetecta.add(lbl);
   panelBajo.add("carta2", panelDetecta);
 
 
-  //creaPaletas();   
+ 
   esqueInf.show(panelBajo, "carta1");
 
   this.add("South",panelBajo);

@@ -101,7 +101,7 @@ public class Detector {
 		alto = imagenOriginal.getHeight(null);
 	}
 	
-	public JLabel ejecutaErosion(String ruta){
+	public void ejecutaErosion(String ruta){
 		obtenerImagen(ruta);
 		imagenCuantizada2 = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
 		seg = new Segmentacion(ancho,alto);
@@ -112,33 +112,33 @@ public class Detector {
 		
 		imgAclarada = aclarador.aclara(imgErosion);
 		mapa = Segmentacion.segmentaFinal(imgAclarada, imagenCuantizada2);
-		for(int i=1; i<ancho; i++){
-			if(i%21==0){
-				for(int j=1; j<alto;j++){
-					if(j%21==0){
-						value =  imgAclarada.getRGB(i,j);
-						rgbs = Colores.obtieneRGB(value);
-						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
-						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
-						contador[colorpixel]++;
-					}
-				}
-			}
-		}
-
-		ganador=0;
-		pixelesAnalizados=0;
-			
-		for(int i=0;i<12;i++){
-			pixelesAnalizados+=contador[i];
-			if(contador[i]>ganador){
-				ganador=contador[i];
-				colorpixel=i;
-			}
-		}
-		s = new Sonido(colorpixel);
-
-		    	
+//		for(int i=1; i<ancho; i++){
+//			if(i%21==0){
+//				for(int j=1; j<alto;j++){
+//					if(j%21==0){
+//						value =  imgAclarada.getRGB(i,j);
+//						rgbs = Colores.obtieneRGB(value);
+//						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
+//						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
+//						contador[colorpixel]++;
+//					}
+//				}
+//			}
+//		}
+//
+//		ganador=0;
+//		pixelesAnalizados=0;
+//			
+//		for(int i=0;i<12;i++){
+//			pixelesAnalizados+=contador[i];
+//			if(contador[i]>ganador){
+//				ganador=contador[i];
+//				colorpixel=i;
+//			}
+//		}
+//		s = new Sonido(colorpixel);
+//
+//		    	
 			
 				
 				
@@ -172,11 +172,11 @@ public class Detector {
 				
 			
 		
-		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
+//		return lblDetecta = new JLabel("Color ",JLabel.CENTER);
 	}
 	
 	
-	public JLabel ejecutaMedia(String ruta){
+	public void ejecutaMedia(String ruta){
 		obtenerImagen(ruta);
 		imagenCuantizada2 = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
 		seg = new Segmentacion(ancho,alto);
@@ -187,36 +187,36 @@ public class Detector {
 		imgAclarada = aclarador.aclara(imgMedia);
 		mapa = Segmentacion.segmentaFinal(imgAclarada, imagenCuantizada2);
 
-		for(int i=1; i<ancho; i++){
-			if(i%21==0){
-				for(int j=1; j<alto;j++){
-					if(j%21==0){
-						value =  imgAclarada.getRGB(i,j);
-						rgbs = Colores.obtieneRGB(value);
-						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
-						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
-						contador[colorpixel]++;
-					}
-				}
-			}
-		}
-
-		ganador=0;
-		pixelesAnalizados=0;
-			
-		for(int i=0;i<12;i++){
-			pixelesAnalizados+=contador[i];
-			if(contador[i]>ganador){
-				ganador=contador[i];
-				colorpixel=i;
-			}
-		}
-		s = new Sonido(colorpixel);
-		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
+//		for(int i=1; i<ancho; i++){
+//			if(i%21==0){
+//				for(int j=1; j<alto;j++){
+//					if(j%21==0){
+//						value =  imgAclarada.getRGB(i,j);
+//						rgbs = Colores.obtieneRGB(value);
+//						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
+//						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
+//						contador[colorpixel]++;
+//					}
+//				}
+//			}
+//		}
+//
+//		ganador=0;
+//		pixelesAnalizados=0;
+//			
+//		for(int i=0;i<12;i++){
+//			pixelesAnalizados+=contador[i];
+//			if(contador[i]>ganador){
+//				ganador=contador[i];
+//				colorpixel=i;
+//			}
+//		}
+//		s = new Sonido(colorpixel);
+//		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
 	}
 	
 	
-	public JLabel ejecutaMediana(String ruta){
+	public void ejecutaMediana(String ruta){
 		obtenerImagen(ruta);
 		imagenCuantizada2 = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
 		seg = new Segmentacion(ancho,alto);
@@ -226,37 +226,37 @@ public class Detector {
 		imgMediana = seg.filtroMediana(imagenOriginal);
 		imgAclarada = aclarador.aclara(imgMediana);
 		mapa = Segmentacion.segmentaFinal(imgAclarada, imagenCuantizada2);
-		for(int i=1; i<ancho; i++){
-			if(i%21==0){
-				for(int j=1; j<alto;j++){
-					if(j%21==0){
-						value =  imgAclarada.getRGB(i,j);
-						rgbs = Colores.obtieneRGB(value);
-						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
-						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
-						contador[colorpixel]++;
-					}
-				}
-			}
-		}
-
-		ganador=0;
-		pixelesAnalizados=0;
-				
-		for(int i=0;i<12;i++){
-			pixelesAnalizados+=contador[i];
-			if(contador[i]>ganador){
-				ganador=contador[i];
-				colorpixel=i;
-			}
-		}
-		s = new Sonido(colorpixel);
-		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
+//		for(int i=1; i<ancho; i++){
+//			if(i%21==0){
+//				for(int j=1; j<alto;j++){
+//					if(j%21==0){
+//						value =  imgAclarada.getRGB(i,j);
+//						rgbs = Colores.obtieneRGB(value);
+//						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
+//						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
+//						contador[colorpixel]++;
+//					}
+//				}
+//			}
+//		}
+//
+//		ganador=0;
+//		pixelesAnalizados=0;
+//				
+//		for(int i=0;i<12;i++){
+//			pixelesAnalizados+=contador[i];
+//			if(contador[i]>ganador){
+//				ganador=contador[i];
+//				colorpixel=i;
+//			}
+//		}
+//		s = new Sonido(colorpixel);
+//		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
 	}
 
 	///////////////////////////
 
-	public JLabel ejecutaApertura(String ruta) {
+	public void ejecutaApertura(String ruta) {
 		obtenerImagen(ruta);
 		imagenCuantizada2 = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
 		seg = new Segmentacion(ancho,alto);
@@ -267,36 +267,36 @@ public class Detector {
 		imgApertura = fil.dilate(imgErosion); 
 		imgAclarada = aclarador.aclara(imgApertura);
 		mapa = Segmentacion.segmentaFinal(imgAclarada, imagenCuantizada2);
-		for(int i=1; i<ancho; i++){
-			if(i%21==0){
-				for(int j=1; j<alto;j++){
-					if(j%21==0){
-						value =  imgAclarada.getRGB(i,j);
-						rgbs = Colores.obtieneRGB(value);
-						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
-						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
-						contador[colorpixel]++;
-					}
-				}
-			}
-		}
-
-		ganador=0;
-		pixelesAnalizados=0;
-				
-		for(int i=0;i<12;i++){
-			pixelesAnalizados+=contador[i];
-			if(contador[i]>ganador){
-				ganador=contador[i];
-				colorpixel=i;
-			}
-		}
-		s = new Sonido(colorpixel);
-		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
+//		for(int i=1; i<ancho; i++){
+//			if(i%21==0){
+//				for(int j=1; j<alto;j++){
+//					if(j%21==0){
+//						value =  imgAclarada.getRGB(i,j);
+//						rgbs = Colores.obtieneRGB(value);
+//						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
+//						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
+//						contador[colorpixel]++;
+//					}
+//				}
+//			}
+//		}
+//
+//		ganador=0;
+//		pixelesAnalizados=0;
+//				
+//		for(int i=0;i<12;i++){
+//			pixelesAnalizados+=contador[i];
+//			if(contador[i]>ganador){
+//				ganador=contador[i];
+//				colorpixel=i;
+//			}
+//		}
+//		s = new Sonido(colorpixel);
+//		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
 	}
 
 
-	public JLabel ejecutaCierre(String ruta) {
+	public void ejecutaCierre(String ruta) {
 		obtenerImagen(ruta);
 		imagenCuantizada2 = new BufferedImage(ancho,alto,BufferedImage.TYPE_INT_RGB);
 		seg = new Segmentacion(ancho,alto);
@@ -308,32 +308,32 @@ public class Detector {
 		imgCierre = fil.erode(imgDilatacion);
 		imgAclarada = aclarador.aclara(imgCierre);
 		mapa = Segmentacion.segmentaFinal(imgAclarada, imagenCuantizada2);
-		for(int i=1; i<ancho; i++){
-			if(i%21==0){
-				for(int j=1; j<alto;j++){
-					if(j%21==0){
-						value =  imgAclarada.getRGB(i,j);
-						rgbs = Colores.obtieneRGB(value);
-						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
-						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
-						contador[colorpixel]++;
-					}
-				}
-			}
-		}
-
-		ganador=0;
-		pixelesAnalizados=0;
-				
-		for(int i=0;i<12;i++){
-			pixelesAnalizados+=contador[i];
-			if(contador[i]>ganador){
-				ganador=contador[i];
-				colorpixel=i;
-			}
-		}
-		s = new Sonido(colorpixel);
-		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
+//		for(int i=1; i<ancho; i++){
+//			if(i%21==0){
+//				for(int j=1; j<alto;j++){
+//					if(j%21==0){
+//						value =  imgAclarada.getRGB(i,j);
+//						rgbs = Colores.obtieneRGB(value);
+//						Color.RGBtoHSB(rgbs[0], rgbs[1], rgbs[2], hsb);
+//						colorpixel = Colores.decideColor(hsb[0], hsb[1], hsb[2]);
+//						contador[colorpixel]++;
+//					}
+//				}
+//			}
+//		}
+//
+//		ganador=0;
+//		pixelesAnalizados=0;
+//				
+//		for(int i=0;i<12;i++){
+//			pixelesAnalizados+=contador[i];
+//			if(contador[i]>ganador){
+//				ganador=contador[i];
+//				colorpixel=i;
+//			}
+//		}
+//		s = new Sonido(colorpixel);
+//		return lblDetecta = new JLabel("Color "+new Colores().getColoresMap().get(colorpixel)+". Aparicion: "+(100*ganador)/pixelesAnalizados+"%",JLabel.CENTER);
 	}
 
 	

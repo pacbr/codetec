@@ -8,8 +8,6 @@ import javax.swing.JMenuItem;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import clases.Detector;
-import clases.DetectorMedia;
-import clases.DetectorMediana;
 
 //@Desc Implementa la gestión de evento en la interfaz de usuario
 public class Controlador implements ActionListener, ChangeListener{
@@ -45,7 +43,8 @@ public class Controlador implements ActionListener, ChangeListener{
 		
 		else if(i.getText() == "Paso a paso (Erosión)"){
 			//		panel.panelBajo.remove(0);
-					JLabel lbl = manejador.detectaColorPasoAPaso();
+			panel.esqueInf.show(panel.panelBajo, "carta1");		
+			JLabel lbl = manejador.detectaColorPasoAPaso();
 					panel.panelDetecta.remove(0);
 					panel.panelDetecta.add("Center", lbl);
 					panel.esqueInf.show(panel.panelBajo, "carta2");
@@ -53,6 +52,7 @@ public class Controlador implements ActionListener, ChangeListener{
 		
 		else if(i.getText() == "Erosión"){
 	//		panel.panelBajo.remove(0);
+			panel.esqueInf.show(panel.panelBajo, "carta1");
 			JLabel lbl = manejador.detectaColorErosion();
 			panel.panelDetecta.remove(0);
 			panel.panelDetecta.add("Center", lbl);
@@ -61,7 +61,7 @@ public class Controlador implements ActionListener, ChangeListener{
 		
 		else if(i.getText() == "Media"){
 			//		panel.panelBajo.remove(0);
-				  
+			panel.esqueInf.show(panel.panelBajo, "carta1");
 					JLabel lbl = manejador.detectaColorMedia();
 					panel.panelDetecta.remove(0);
 					panel.panelDetecta.add("Center", lbl);
@@ -70,7 +70,7 @@ public class Controlador implements ActionListener, ChangeListener{
 		
 		else if(i.getText() == "Mediana"){
 			//		panel.panelBajo.remove(0);
-				  
+			panel.esqueInf.show(panel.panelBajo, "carta1");
 					JLabel lbl = manejador.detectaColorMediana();
 					panel.panelDetecta.remove(0);
 					panel.panelDetecta.add("Center", lbl);
@@ -79,7 +79,7 @@ public class Controlador implements ActionListener, ChangeListener{
 		
 		else if(i.getText() == "Apertura"){
 			//		panel.panelBajo.remove(0);
-				  
+			panel.esqueInf.show(panel.panelBajo, "carta1");
 					JLabel lbl = manejador.detectaColorApertura();
 					panel.panelDetecta.remove(0);
 					panel.panelDetecta.add("Center", lbl);
@@ -88,7 +88,7 @@ public class Controlador implements ActionListener, ChangeListener{
 		
 		else if(i.getText() == "Cierre"){
 			//		panel.panelBajo.remove(0);
-				  
+			panel.esqueInf.show(panel.panelBajo, "carta1");
 					JLabel lbl = manejador.detectaColorCierre();
 					panel.panelDetecta.remove(0);
 					panel.panelDetecta.add("Center", lbl);

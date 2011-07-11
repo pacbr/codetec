@@ -15,12 +15,11 @@ import javax.swing.JPanel;
 
 import clases.Colores;
 import clases.Detector;
-import clases.DetectorMedia;
-import clases.DetectorMediana;
 import clases.DetectorPixeles;
 import clases.Grafico;
 import clases.GraficoPasos;
 import clases.Pixel;
+import clases.Sonido;
 /*@Desc Clase del nivel de la capa de negocios. Implementa las operaciones que son llamadas desde el Controlador de la aplicación
  * para poder cargar las imagenes, alamacenarlas y modificaralas, apoyandose en un objeto la clase de más bajo nivel, es decir ProcesadorDeImagenes 
  */
@@ -28,6 +27,8 @@ public class ManejadorDeImagenes {
 	ProcesadorDeImagenes procesador; 
 	String ruta;
 	boolean editado = false;  
+	Colores c = new Colores();
+	Sonido s;
 	
 	// Constructor de la clase 
 	public ManejadorDeImagenes() {
@@ -91,122 +92,82 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
  
  ////////////////////
  
+	
+
  public JLabel detectaColorErosion(){
 	 BufferedImage imagenCuantizada;
 	 BufferedImage imagenOriginal;
 	 Detector detector = new Detector();
 		
-	 JLabel jl = detector.ejecutaErosion(ruta);
+	 detector.ejecutaErosion(ruta);
 	 imagenCuantizada=detector.getImagenCuantizada();
 	 imagenOriginal=detector.getImagenOriginal();
 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
 
 	 cargaFrameDetectorPixeles(detPix, "Erosion");
-
-	 DecimalFormat formateador = new DecimalFormat("####.#%");
-	 String porcentaje;
-	 Map<Integer, List<Pixel>> mapa = detector.getMapa();
 	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
-	 for(int i=0;i<12;i++){
-		 if(!mapa.containsKey(i)){
-			 detPix.setPorcentaje(i,"0%");
-		 }else{
-			 porcentaje = formateador.format((float)(mapa.get(i).size())/(numPixeles));
-			 detPix.setPorcentaje(i,porcentaje);
-		 }
-	 }
-     return jl;
+	 
+     return creaJLabelPrincipal(detector, detPix, numPixeles);
 }
  
  public JLabel detectaColorMedia(){
-	 Detector detectorMedia = new Detector();
-		
 	 BufferedImage imagenCuantizada;
 	 BufferedImage imagenOriginal;
-	 JLabel jl = detectorMedia.ejecutaMedia(ruta);
+	 Detector detectorMedia = new Detector();
+	 
+	 detectorMedia.ejecutaMedia(ruta);
 	 imagenCuantizada=detectorMedia.getImagenCuantizada();
 	 imagenOriginal=detectorMedia.getImagenOriginal();
 	 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
      
 	 cargaFrameDetectorPixeles(detPix, "Media");
-
-	 DecimalFormat formateador = new DecimalFormat("####.#%");
-	 String porcentaje;
-	 Map<Integer, List<Pixel>> mapa = detectorMedia.getMapa();
 	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
-	 for(int i=0;i<12;i++){
-		 if(!mapa.containsKey(i)){
-			 detPix.setPorcentaje(i,"0%");
-		 }else{
-			 porcentaje = formateador.format((float)(mapa.get(i).size())/(numPixeles));
-			 detPix.setPorcentaje(i,porcentaje);
-		 }
-	 }
-     return jl;
+	 
+     return creaJLabelPrincipal(detectorMedia, detPix, numPixeles);
 	 
 //	 c.imprimeConfirmacion();
  }
  
  public JLabel detectaColorMediana(){
-	 Detector detectorMediana = new Detector();
 	 BufferedImage imagenCuantizada;
 	 BufferedImage imagenOriginal;
-	 JLabel jl = detectorMediana.ejecutaMediana(ruta);
+	 Detector detectorMediana = new Detector();
+	 
+	 detectorMediana.ejecutaMediana(ruta);
 	 imagenCuantizada=detectorMediana.getImagenCuantizada();
 	 imagenOriginal=detectorMediana.getImagenOriginal();
 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
      
 	 cargaFrameDetectorPixeles(detPix, "Mediana");
-     
-	 DecimalFormat formateador = new DecimalFormat("####.#%");
-	 String porcentaje;
-	 Map<Integer, List<Pixel>> mapa = detectorMediana.getMapa();
-	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
-	 for(int i=0;i<12;i++){
-		 if(!mapa.containsKey(i)){
-			 detPix.setPorcentaje(i,"0%");
-		 }else{
-			 porcentaje = formateador.format((float)(mapa.get(i).size())/(numPixeles));
-			 detPix.setPorcentaje(i,porcentaje);
-		 }
-	 }
-     return jl;
+     int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
+	 
+     return creaJLabelPrincipal(detectorMediana, detPix, numPixeles);
  }
  
  public JLabel detectaColorApertura(){
-	 Detector detectorApertura = new Detector();
 	 BufferedImage imagenCuantizada;
 	 BufferedImage imagenOriginal;
-	 JLabel jl = detectorApertura.ejecutaApertura(ruta);
+	 Detector detectorApertura = new Detector();
+	 
+	 detectorApertura.ejecutaApertura(ruta);
 	 imagenCuantizada=detectorApertura.getImagenCuantizada();
 	 imagenOriginal=detectorApertura.getImagenOriginal();
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
      
 	 cargaFrameDetectorPixeles(detPix, "Apertura");
-     
-	 DecimalFormat formateador = new DecimalFormat("####.#%");
-	 String porcentaje;
-	 Map<Integer, List<Pixel>> mapa = detectorApertura.getMapa();
-	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
-	 for(int i=0;i<12;i++){
-		 if(!mapa.containsKey(i)){
-			 detPix.setPorcentaje(i,"0%");
-		 }else{
-			 porcentaje = formateador.format((float)(mapa.get(i).size())/(numPixeles));
-			 detPix.setPorcentaje(i,porcentaje);
-		 }
-	 }
-     return jl;
+     int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
+	 
+     return creaJLabelPrincipal(detectorApertura, detPix, numPixeles);
 }
  
  public JLabel detectaColorCierre(){
 	 Detector detectorCierre = new Detector();
 	 BufferedImage imagenCuantizada;
 	 BufferedImage imagenOriginal;
-	 JLabel jl = detectorCierre.ejecutaCierre(ruta);
+	 detectorCierre.ejecutaCierre(ruta);
 	 imagenCuantizada=detectorCierre.getImagenCuantizada();
 	 imagenOriginal=detectorCierre.getImagenOriginal();
 	 
@@ -214,29 +175,27 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
      
 	 cargaFrameDetectorPixeles(detPix, "Cierre");
      
-	 DecimalFormat formateador = new DecimalFormat("####.#%");
-	 String porcentaje;
-	 Map<Integer, List<Pixel>> mapa = detectorCierre.getMapa();
 	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
-	 for(int i=0;i<12;i++){
-		 if(!mapa.containsKey(i)){
-			 detPix.setPorcentaje(i,"0%");
-		 }else{
-			 porcentaje = formateador.format((float)(mapa.get(i).size())/(numPixeles));
-			 detPix.setPorcentaje(i,porcentaje);
-		 }
-	 }
-     return jl;
+	 
+     return creaJLabelPrincipal(detectorCierre, detPix, numPixeles);
  }
  
  public JLabel detectaColorPasoAPaso(){
 	 Detector detectorPasoAPaso = new Detector();
-	 JLabel jl = detectorPasoAPaso.ejecutaErosion(ruta);
+	 detectorPasoAPaso.ejecutaErosion(ruta);
 	 GraficoPasos gp = new GraficoPasos(detectorPasoAPaso, this);
 	 
-	 return jl;
+	 BufferedImage imagenCuantizada;
+	 detectorPasoAPaso.ejecutaErosion(ruta);
+	 imagenCuantizada=detectorPasoAPaso.getImagenCuantizada();
+	 DetectorPixeles detPix = gp.getDetPix();
 	 
-
+	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
+	 JLabel lb = creaJLabelPrincipal(detectorPasoAPaso, detPix, numPixeles);
+	 gp.setVisible(true);
+	 
+     return lb;
+	 
  }
  
  public void cargaFrameDetectorPixeles(DetectorPixeles dp, String nombreDelFrame){
@@ -249,6 +208,30 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 f.setLocationRelativeTo(null);
 	 f.setVisible(true);
  }
+ 
+ public JLabel creaJLabelPrincipal(Detector det, DetectorPixeles detPix, int numPixeles){
+		DecimalFormat formateador = new DecimalFormat("####.#%");
+		 String porcentaje;
+		 Map<Integer, List<Pixel>> mapa = det.getMapa();
+		 Integer ganador = null;
+		 int aparicionesGanador=0;
+		 for(int i=0;i<12;i++){
+			 if(!mapa.containsKey(i)){
+				 detPix.setPorcentaje(i,"0%");
+			 }else{
+				 List<Pixel> l = mapa.get(i);
+				 if(l.size()>aparicionesGanador){
+					 ganador=i;
+					 aparicionesGanador = l.size();
+				 }
+				 porcentaje = formateador.format((float)(l.size())/(numPixeles));
+				 detPix.setPorcentaje(i,porcentaje);
+			 }
+		 }
+		 s = new Sonido(ganador);
+	     return new JLabel("Color "+c.getColoresMap().get(ganador)+". Aparicion: "+(100*aparicionesGanador)/numPixeles+"%",JLabel.CENTER);
+	}
+ 
  
  
  public void cargaAyuda(){
