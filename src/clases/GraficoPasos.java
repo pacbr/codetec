@@ -33,6 +33,11 @@ public class GraficoPasos extends JFrame{
 	JPanel panelTexto;
 	JButton siguiente;
 	JLabel lbtexto;
+	
+	public DetectorPixeles getDetPix(){
+		return detPix;
+	}
+	
 	public GraficoPasos(Detector detectorPasoAPaso, ManejadorDeImagenes manejador){
 		super("Paso a paso");
 		imagenOriginal=detectorPasoAPaso.getImagenOriginal();
@@ -46,8 +51,7 @@ public class GraficoPasos extends JFrame{
 		ImageIcon im4 = new ImageIcon(imagenCuantizada);
 		
 		
-		int contador[]=detectorPasoAPaso.getContadorPixeles();
-		 int pixelesAnalizados = detectorPasoAPaso.getPixelesAnalizados();
+		
 		 
 		 detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
 //	     
@@ -64,14 +68,7 @@ public class GraficoPasos extends JFrame{
 				 frame.setVisible(false);
 		 
 		 
-		 DecimalFormat formateador = new DecimalFormat("####.#%");
-		 String porcentaje;
-		 for(int i=0;i<contador.length;i++){
-			 
-			 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
-			 detPix.setPorcentaje(i,porcentaje);
-//
-		 }
+		 
 		
 		
 		this.setLayout(new BorderLayout()); 
@@ -149,7 +146,7 @@ public class GraficoPasos extends JFrame{
 	    esqueImagenes.show(panelImagenes,"imagenOriginal");
 		this.pack();
 		this.setLocationRelativeTo(null);
-		this.setVisible(true);
+		this.setVisible(false);
 		
 		
 		
