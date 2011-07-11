@@ -3,6 +3,7 @@ package cargador;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
@@ -19,6 +20,7 @@ import clases.DetectorMediana;
 import clases.DetectorPixeles;
 import clases.Grafico;
 import clases.GraficoPasos;
+import clases.Pixel;
 /*@Desc Clase del nivel de la capa de negocios. Implementa las operaciones que son llamadas desde el Controlador de la aplicación
  * para poder cargar las imagenes, alamacenarlas y modificaralas, apoyandose en un objeto la clase de más bajo nivel, es decir ProcesadorDeImagenes 
  */
@@ -97,8 +99,6 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 JLabel jl = detector.ejecutaErosion(ruta);
 	 imagenCuantizada=detector.getImagenCuantizada();
 	 imagenOriginal=detector.getImagenOriginal();
-	 int contador[]=detector.getContadorPixeles();
-	 int pixelesAnalizados = detector.getPixelesAnalizados();
 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
 
@@ -106,18 +106,18 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 
 	 DecimalFormat formateador = new DecimalFormat("####.#%");
 	 String porcentaje;
-	 for(int i=0;i<contador.length;i++){
-		 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
-		 detPix.setPorcentaje(i,porcentaje);
-
+	 Map<Integer, List<Pixel>> mapa = detector.getMapa();
+	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
+	 for(int i=0;i<12;i++){
+		 if(!mapa.containsKey(i)){
+			 detPix.setPorcentaje(i,"0%");
+		 }else{
+			 porcentaje = formateador.format((float)(mapa.get(i).size())/(numPixeles));
+			 detPix.setPorcentaje(i,porcentaje);
+		 }
 	 }
-     
-     
-     
-	 return jl;
-	 
-
- }
+     return jl;
+}
  
  public JLabel detectaColorMedia(){
 	 Detector detectorMedia = new Detector();
@@ -127,24 +127,24 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 JLabel jl = detectorMedia.ejecutaMedia(ruta);
 	 imagenCuantizada=detectorMedia.getImagenCuantizada();
 	 imagenOriginal=detectorMedia.getImagenOriginal();
-	 int contador[]=detectorMedia.getContadorPixeles();
-	 int pixelesAnalizados = detectorMedia.getPixelesAnalizados();
-	 
+	 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
      
 	 cargaFrameDetectorPixeles(detPix, "Media");
 
 	 DecimalFormat formateador = new DecimalFormat("####.#%");
 	 String porcentaje;
-	 for(int i=0;i<contador.length;i++){
-		 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
-		 detPix.setPorcentaje(i,porcentaje);
-
+	 Map<Integer, List<Pixel>> mapa = detectorMedia.getMapa();
+	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
+	 for(int i=0;i<12;i++){
+		 if(!mapa.containsKey(i)){
+			 detPix.setPorcentaje(i,"0%");
+		 }else{
+			 porcentaje = formateador.format((float)(mapa.get(i).size())/(numPixeles));
+			 detPix.setPorcentaje(i,porcentaje);
+		 }
 	 }
-     
-     
-     
-	 return jl;
+     return jl;
 	 
 //	 c.imprimeConfirmacion();
  }
@@ -156,8 +156,6 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 JLabel jl = detectorMediana.ejecutaMediana(ruta);
 	 imagenCuantizada=detectorMediana.getImagenCuantizada();
 	 imagenOriginal=detectorMediana.getImagenOriginal();
-	 int contador[]=detectorMediana.getContadorPixeles();
-	 int pixelesAnalizados = detectorMediana.getPixelesAnalizados();
 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
      
@@ -165,17 +163,17 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
      
 	 DecimalFormat formateador = new DecimalFormat("####.#%");
 	 String porcentaje;
-	 for(int i=0;i<contador.length;i++){
-		 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
-		 detPix.setPorcentaje(i,porcentaje);
-
+	 Map<Integer, List<Pixel>> mapa = detectorMediana.getMapa();
+	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
+	 for(int i=0;i<12;i++){
+		 if(!mapa.containsKey(i)){
+			 detPix.setPorcentaje(i,"0%");
+		 }else{
+			 porcentaje = formateador.format((float)(mapa.get(i).size())/(numPixeles));
+			 detPix.setPorcentaje(i,porcentaje);
+		 }
 	 }
-     
-     
-     
-	 return jl;
-	 
-
+     return jl;
  }
  
  public JLabel detectaColorApertura(){
@@ -185,27 +183,24 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 JLabel jl = detectorApertura.ejecutaApertura(ruta);
 	 imagenCuantizada=detectorApertura.getImagenCuantizada();
 	 imagenOriginal=detectorApertura.getImagenOriginal();
-	 int contador[]=detectorApertura.getContadorPixeles();
-	 int pixelesAnalizados = detectorApertura.getPixelesAnalizados();
-	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
      
 	 cargaFrameDetectorPixeles(detPix, "Apertura");
      
 	 DecimalFormat formateador = new DecimalFormat("####.#%");
 	 String porcentaje;
-	 for(int i=0;i<contador.length;i++){
-		 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
-		 detPix.setPorcentaje(i,porcentaje);
-
+	 Map<Integer, List<Pixel>> mapa = detectorApertura.getMapa();
+	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
+	 for(int i=0;i<12;i++){
+		 if(!mapa.containsKey(i)){
+			 detPix.setPorcentaje(i,"0%");
+		 }else{
+			 porcentaje = formateador.format((float)(mapa.get(i).size())/(numPixeles));
+			 detPix.setPorcentaje(i,porcentaje);
+		 }
 	 }
-     
-     
-     
-	 return jl;
-	 
-
- }
+     return jl;
+}
  
  public JLabel detectaColorCierre(){
 	 Detector detectorCierre = new Detector();
@@ -214,8 +209,6 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 JLabel jl = detectorCierre.ejecutaCierre(ruta);
 	 imagenCuantizada=detectorCierre.getImagenCuantizada();
 	 imagenOriginal=detectorCierre.getImagenOriginal();
-	 int contador[]=detectorCierre.getContadorPixeles();
-	 int pixelesAnalizados = detectorCierre.getPixelesAnalizados();
 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
      
@@ -223,17 +216,17 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
      
 	 DecimalFormat formateador = new DecimalFormat("####.#%");
 	 String porcentaje;
-	 for(int i=0;i<contador.length;i++){
-		 porcentaje = formateador.format((float)(contador[i])/(pixelesAnalizados));
-		 detPix.setPorcentaje(i,porcentaje);
-
+	 Map<Integer, List<Pixel>> mapa = detectorCierre.getMapa();
+	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
+	 for(int i=0;i<12;i++){
+		 if(!mapa.containsKey(i)){
+			 detPix.setPorcentaje(i,"0%");
+		 }else{
+			 porcentaje = formateador.format((float)(mapa.get(i).size())/(numPixeles));
+			 detPix.setPorcentaje(i,porcentaje);
+		 }
 	 }
-     
-     
-     
-	 return jl;
-	 
-
+     return jl;
  }
  
  public JLabel detectaColorPasoAPaso(){
