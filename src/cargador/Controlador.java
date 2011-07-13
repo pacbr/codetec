@@ -95,10 +95,10 @@ public class Controlador implements ActionListener/*, ChangeListener*/{
 					panel.esqueInf.show(panel.panelBajo, "carta2");
 		}
 		
-		else if(i.getText() == "Ayuda"){
+		else if(i.getText() == "CODETEC"){
 			//		panel.panelBajo.remove(0);
 				  
-					System.out.println("Ayuda CONTROLADOR");
+//					System.out.println("Ayuda CONTROLADOR");
 					manejador.cargaAyuda();
 		}
 	}

@@ -70,7 +70,7 @@ import javax.swing.event.ChangeListener;
 //barraMenu.add(detectaMediana);
   
 
-ayuda = menuArchivo.add("Ayuda");
+ayuda = menuArchivo.add("CODETEC");
 barraMenu.add(ayuda);
   
 
