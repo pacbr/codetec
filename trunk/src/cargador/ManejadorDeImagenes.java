@@ -1,11 +1,17 @@
 package cargador;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -235,7 +241,53 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
  
  
  public void cargaAyuda(){
-	 System.out.println("AYUDA");
+//	 System.out.println("AYUDA");
+//	 Box panelAyuda = Box.createVerticalBox();
+//	
+//	 JLabel jl1 = new JLabel("CODETEC V2.0");
+//	 jl1.setHorizontalAlignment(JLabel.CENTER);
+//	 jl1.setFont(new Font("Verdana", Font.BOLD, 30));
+//	 jl1.setForeground(Color.ORANGE);
+//	 panelAyuda.add(jl1);
+//	 
+//	 JLabel jl2 = new JLabel("Proyecto fin de carrera");
+//	 jl2.setHorizontalAlignment(JLabel.CENTER);
+//	 jl2.setFont(new Font("Verdana", Font.BOLD, 20));
+//	 jl2.setForeground(Color.ORANGE);
+//	 panelAyuda.add(jl2);
+//
+//	 JLabel jl3 = new JLabel("Curso 2010-2011");
+//	 jl3.setHorizontalAlignment(JLabel.CENTER);
+//	 jl3.setFont(new Font("Verdana", Font.BOLD, 20));
+////	 jl3.setForeground(Color.ORANGE);
+//	 panelAyuda.add(jl3);
+//	 
+//	 JLabel jl4 = new JLabel("Francisco Palomares Vela");
+//	 jl4.setHorizontalAlignment(JLabel.CENTER);
+//	 jl4.setFont(new Font("Verdana", Font.BOLD, 20));
+////	 jl4.setForeground(Color.ORANGE);
+//	 panelAyuda.add(jl4);
+//	 
+//	 JFrame frameAyuda = new JFrame();
+//	 frameAyuda.add(panelAyuda);
+//	 
+//	 frameAyuda.pack();
+//	 frameAyuda.setLocationRelativeTo(null);
+//	 frameAyuda.setVisible(true);
+	 JPanel jpAcercaDe = new JPanel();
+	 File imagen = new File(System.getProperty("user.dir")+"/sonidoscolores/tarjeta.jpg");
+	 try {
+		jpAcercaDe.add(new JLabel(new ImageIcon(ImageIO.read(imagen))));
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	 JFrame frameAyuda = new JFrame();
+	 frameAyuda.add(jpAcercaDe);
+	 
+	 frameAyuda.pack();
+	 frameAyuda.setLocationRelativeTo(null);
+	 frameAyuda.setVisible(true);
  }
  //////////////
  
