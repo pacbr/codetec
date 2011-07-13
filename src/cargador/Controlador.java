@@ -10,7 +10,7 @@ import javax.swing.event.ChangeListener;
 import clases.Detector;
 
 //@Desc Implementa la gestión de evento en la interfaz de usuario
-public class Controlador implements ActionListener, ChangeListener{
+public class Controlador implements ActionListener/*, ChangeListener*/{
 	ManejadorDeImagenes manejador;
 	PanelSwing panel;
  
@@ -105,7 +105,7 @@ public class Controlador implements ActionListener, ChangeListener{
 	  
   
 	//@Desc Método que captarará los eventos ocurridos en los componentes JSlider de la interfaz de usuario
-	public void stateChanged(ChangeEvent e){
+//	public void stateChanged(ChangeEvent e){
 	//  JSlider slider = (JSlider) e.getSource();
 	//  if(slider == panel.jslBrillo)
 	//   manejador.muestraBrillo(panel.lienzo, slider.getValue());
@@ -116,5 +116,5 @@ public class Controlador implements ActionListener, ChangeListener{
 	//   manejador.muestraColores(panel.lienzo, panel.jslRojo.getValue(), slider.getValue(), panel.jslAzul.getValue());
 	//  else if(slider == panel.jslAzul)
 	//   manejador.muestraColores(panel.lienzo, panel.jslRojo.getValue(), panel.jslVerde.getValue(), slider.getValue());  
-	}
+//	}
 }
