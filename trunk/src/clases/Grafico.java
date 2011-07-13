@@ -2,7 +2,10 @@ package clases;
 
 import javax.swing.*;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.*;
 
 public class Grafico extends JFrame{
@@ -17,6 +20,7 @@ public class Grafico extends JFrame{
 	
 	JLabel et1;
 	JLabel et2;
+	JPanel panelImagenes = new JPanel();
 	Grafico g;
 	CardLayout esqueGris;
     int i;
@@ -28,13 +32,21 @@ public class Grafico extends JFrame{
 		et1 = et;
 		et2 = jletiqueta;
 		timer = new Timer (300, new ActionListener ());
-
-		esqueGris = new CardLayout();
-		setLayout(esqueGris);
-		getContentPane().add("jlabel1",et1);
-		getContentPane().add("jlabel2",et2);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
+		
+		esqueGris = new CardLayout();
+		JLabel jl = new JLabel("Pincha sobre la imagen");
+		jl.setHorizontalAlignment(JLabel.CENTER);
+		jl.setFont(new Font("Verdana", Font.BOLD, 17));
+		jl.setForeground(Color.ORANGE);
+		getContentPane().add(jl,BorderLayout.NORTH);
+		
+		panelImagenes.setLayout(esqueGris);
+		
+		panelImagenes.add("jlabel1",et1);
+		panelImagenes.add("jlabel2",et2);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getContentPane().add(panelImagenes,BorderLayout.SOUTH);
 		this.pack();
 		this.setLocationRelativeTo(null);
 	 	this.setVisible(true);
@@ -46,10 +58,10 @@ public class Grafico extends JFrame{
 	class ActionListener implements java.awt.event.ActionListener{		
 		public void actionPerformed(ActionEvent e){
 	    	if (i==1){
-				esqueGris.show(g.getContentPane(),"jlabel2");
+				esqueGris.show(g.panelImagenes,"jlabel2");
 				i=2;
 			}else{
-				esqueGris.show(g.getContentPane(),"jlabel1");
+				esqueGris.show(g.panelImagenes,"jlabel1");
 				i=1;
 			}
 	    	cont++;
