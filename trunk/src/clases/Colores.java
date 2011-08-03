@@ -9,7 +9,7 @@ public class Colores {
 	public Colores(){
 		coloresMap.put(0, "Rojo");
 		coloresMap.put(1, "Naranja");
-		coloresMap.put(2, "Marron");
+		coloresMap.put(2, "Marrón");
 		coloresMap.put(3, "Amarillo");
 		coloresMap.put(4, "Verde");
 		coloresMap.put(5, "Celeste");
@@ -29,7 +29,7 @@ public class Colores {
 		}else if(color == 1){//Naranja
 			valor = 0xFF8000;
 		}else if(color == 2){//Marron
-			valor = 0x800000;
+			valor = 0x61210B;//0x800000;
 		}else if(color == 3){//Amarillo
 			valor = 0xFFFF00;
 		}else if(color == 4){//Verde
@@ -75,53 +75,73 @@ public class Colores {
 			//			System.out.println("Color BLANCO");
 			color = 9;
 			enc=true;
-		}else if (((brillo<13)||(saturacion<5)&&(brillo<30))&&!enc){
+		}else if (((brillo<16)||(saturacion<5)&&(brillo<17))&&!enc){
 //			System.out.println("Color NEGRO");
 			color = 11;
+			
 			enc=true;
-		}else if (((saturacion<=10 && brillo>30&& brillo<80)||(saturacion<=6 && brillo>30&& brillo<=90)||(saturacion<=20 && brillo<=48)||(saturacion<15 && brillo<60)||(saturacion<10 && brillo<76)||(saturacion<5 && brillo<90)) && !enc){
+		}else if (((saturacion<=10 && brillo>30&& brillo<70)||(saturacion<=6 && brillo>30&& brillo<=90)||(saturacion<=20 && brillo<=40)||(saturacion<15 && brillo<44)||(saturacion<10 && brillo<70)||(saturacion<5 && brillo<90)) && !enc){
 //			System.out.println("Color GRIS");
 			color = 10;
 			enc=true;
-		}else if ((matiz<=14.0 || matiz>347) &&!enc){
+			
+//			//TODO marron
+//		}else if ((matiz>25 && matiz<31 && ((saturacion>31 && saturacion<60 && brillo > 30 && brillo < 82)|| 
+//				(saturacion>31 && brillo > 30 && brillo < 55)))){
+//				color = 2;
+//				enc=true;
+//		}
+//		else if((matiz>12 && matiz<37 && ((saturacion>35 && brillo > 20 && brillo < 74))&&!enc)){
+//			if (matiz<25 && brillo>64) color=1;
+//			else color = 2; 
+//			enc=true;
+//		
+//		//			System.out.println("Color Marron");
+					
+					
+		}else if ((matiz<=14.0 || matiz>=347) &&!enc){
 	//			System.out.println("Color ROJO");
-				if(brillo<30) color = 11;
+				if(brillo<21) color = 11;
+				else if(saturacion<39 &&saturacion>15 &&brillo>89) color =8;
+				else if(saturacion<=15 &&brillo>90) color =9;
+				else if(saturacion<15) color=10;
 				else color = 0;
 				enc=true;
+				
 		}else if ((matiz>=14.0 && matiz<41)&&!enc){
 	//			System.out.println("Color NARANJA");
 				color = 1;
+				if(saturacion>45&&brillo>20&&brillo<40) color=2;
 				enc=true;
 		}else if ((matiz>=41 && matiz<71)&&!enc){
 //			System.out.println("Color AMARILLO");
 			color = 3;
+			if(matiz>63 && brillo<86) color=4;
 			enc=true;
 		
 		
-		//TODO marron
-		}else if (matiz>25 && matiz<31 && ((saturacion>31 && saturacion<60 && brillo > 30 && brillo < 82)|| (saturacion>31 && brillo > 30 && brillo < 55))&&!enc){
-//			System.out.println("Color Marron");
-			color = 2;
-			enc=true;
+		
 			
-		}else if ((matiz>=71 && matiz<150)&&!enc){
+		}else if ((matiz>=71 && matiz<155)&&!enc){
 //			System.out.println("Color Verde");
 			color = 4;
 			enc=true;
 		
-		}else if (((matiz>=161 && matiz<190) || (saturacion>15 && saturacion<36&& brillo>80))&&!enc){
+		}else if (((matiz>=155 && matiz<190 && brillo>22) || (matiz<208 && matiz>168 && saturacion>15 && saturacion<36&& brillo>80))&&!enc){
 //			System.out.println("Color Celeste");
 			color = 5;
 			enc=true;
 		}else if ((matiz>=190 && matiz<262)&&!enc){
 //			System.out.println("Color Azul");
 			color = 6;
+			if((matiz>240 && saturacion<60)||(matiz>250&&saturacion<70)) color = 7;//violeta
 			enc=true;
-		}else if (((matiz>=262 && matiz<320)|| (matiz>248 && matiz<333 && brillo>15 && brillo<75))&&!enc){
+		}else if (((matiz>=262 && matiz<305)|| (matiz>248 && matiz<333 && brillo>15 && brillo<75))&&!enc){
 //			System.out.println("Color Violeta");
 			color = 7;
+			
 			enc=true;
-		}else if (((matiz>=320 && matiz<347) || (matiz>353 && saturacion<70) || (matiz<7 && saturacion<70))&&!enc)  {
+		}else if (((matiz>=305 && matiz<347) || (matiz>353 && saturacion<70) || (matiz<7 && saturacion<70))&&!enc)  {
 //			System.out.println("Color Rosa");
 			color = 8;
 			enc=true;
