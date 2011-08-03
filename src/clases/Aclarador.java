@@ -15,13 +15,16 @@ public class Aclarador{
 		float valoresHSB[] = new float[3];
 		Colores col = new Colores();
 		int negro = col.obtieneNumeroColor("Negro");
+		int marron = col.obtieneNumeroColor("Marrón");
 		for(int r=0;r<w;r++){
 			
 			for(int c=0;c<h;c++){
 				valorRGB = imagen.getRGB(r,c);
 				
 //				System.out.println(r+","+c);
-				if(col.obtieneColor(imagen.getRGB(r,c))!=negro){
+				if(col.obtieneColor(valorRGB)!=negro){
+					if(col.obtieneColor(imagen.getRGB(r,c))!=marron){
+				
 //					if(r==41 && c==190){
 //						System.out.println("El color es: "+Colores.decideColor(valoresRGB[0], valoresRGB[1], valoresRGB[2]));
 //						int ii=41;
@@ -58,6 +61,9 @@ public class Aclarador{
 					
 					valorRGB = Color.HSBtoRGB(valoresHSB[0], valoresHSB[1], valoresHSB[2]);
 					imgf.setRGB(r, c, valorRGB);
+					}else{
+						imgf.setRGB(r, c, 0x61210B);
+					}
 				}else{
 					imgf.setRGB(r, c, 0x000000);
 				}

@@ -102,7 +102,7 @@ public class DetectorPixeles extends JFrame{
 			Segmentacion seg = new Segmentacion();
 			Grafico g;
 		      public void actionPerformed(ActionEvent actionEvent) {
-		    	BufferedImage imagenGrisClaro = seg.escalaDeGrisesEnRGB(seg.escalaDeGrises(image));
+		    	BufferedImage imagenGrisClaro = seg.escalaDeGrisesEnRGB(seg.escalaDeGrises(imagenOriginal));
 				BufferedImage imagenEscalaGrisesColor = seg.escalaDeGrisesConColor(image, imagenGrisClaro,c.obtieneNumeroColor(actionEvent.getActionCommand()));
 				ImageIcon im1 = new ImageIcon(imagenEscalaGrisesColor);
 				ImageIcon im2 = new ImageIcon(imagenGrisClaro);
