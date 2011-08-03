@@ -111,7 +111,7 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 
 	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
 
-	 cargaFrameDetectorPixeles(detPix, "Erosion");
+	 cargaFrameDetectorPixeles(detPix, "Erosión");
 	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
 	 
      return creaJLabelPrincipal(detector, detPix, numPixeles);
@@ -185,6 +185,25 @@ public boolean guardaArchivoDeImagen(JPanel contenedor){
 	 
      return creaJLabelPrincipal(detectorCierre, detPix, numPixeles);
  }
+ 
+ 
+ public JLabel detectaColorDilatacion(){
+	 BufferedImage imagenCuantizada;
+	 BufferedImage imagenOriginal;
+	 Detector detector = new Detector();
+		
+	 detector.ejecutaDilatacion(ruta);
+	 imagenCuantizada=detector.getImagenCuantizada();
+	 imagenOriginal=detector.getImagenOriginal();
+	 
+	 DetectorPixeles detPix = new DetectorPixeles(imagenCuantizada, imagenOriginal);
+
+	 cargaFrameDetectorPixeles(detPix, "Dilatación");
+	 int numPixeles = imagenCuantizada.getWidth() * imagenCuantizada.getHeight();
+	 
+     return creaJLabelPrincipal(detector, detPix, numPixeles);
+}
+ 
  
  public JLabel detectaColorPasoAPaso(){
 	 Detector detectorPasoAPaso = new Detector();

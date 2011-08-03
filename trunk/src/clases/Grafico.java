@@ -65,7 +65,7 @@ public class Grafico extends JFrame{
 				i=1;
 			}
 	    	cont++;
-	    	System.out.println(cont);
+//	    	System.out.println(cont);
 	    	if(cont==6){
 	    		timer.stop();
 			}

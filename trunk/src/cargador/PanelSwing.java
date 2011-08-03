@@ -11,7 +11,7 @@ import javax.swing.event.ChangeListener;
  String nombreArchivo, ruta;
  JMenuBar barraMenu;
  JMenu menuArchivo, menuFiltros, menuDetecta;
- JMenuItem abrir, abrir2, guardar, salir, detectaErosion, detectaMedia, detectaMediana, detectaApertura, detectaCierre, detectaPasoAPaso, ayuda;
+ JMenuItem abrir, abrir2, guardar, salir, detectaErosion, detectaMedia, detectaMediana, detectaApertura, detectaCierre, detectaDilatacion, detectaPasoAPaso, ayuda;
  JScrollPane panelDespl;
  JPanel panelBajo, panelDetecta, panelColor, panelVacio;
  int altura = 80;
@@ -44,16 +44,22 @@ import javax.swing.event.ChangeListener;
   barraMenu.add(menuArchivo);
   
   detectaErosion = menuFiltros.add("Erosión");
-  detectaMedia = menuFiltros.add("Media");
-  detectaMediana = menuFiltros.add("Mediana");
-  menuFiltros.addSeparator();
+  detectaDilatacion = menuFiltros.add("Dilatación");
+  menuFiltros.addSeparator();  
   detectaApertura = menuFiltros.add("Apertura");
   detectaCierre = menuFiltros.add("Cierre");
+  
+  menuFiltros.addSeparator();
+  detectaMediana = menuFiltros.add("Mediana");
+  detectaMedia = menuFiltros.add("Media");
+
+  
   detectaErosion.setEnabled(false);
   detectaMedia.setEnabled(false);
   detectaMediana.setEnabled(false);
   detectaApertura.setEnabled(false);
   detectaCierre.setEnabled(false);
+  detectaDilatacion.setEnabled(false);
   barraMenu.add(menuFiltros);
   
   detectaPasoAPaso = menuFiltros.add("Paso a paso (Erosión)");
