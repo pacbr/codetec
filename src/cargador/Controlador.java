@@ -33,6 +33,7 @@ public class Controlador implements ActionListener/*, ChangeListener*/{
 				panel.detectaMediana.setEnabled(true);
 				panel.detectaApertura.setEnabled(true);
 				panel.detectaCierre.setEnabled(true);
+				panel.detectaDilatacion.setEnabled(true);
 				panel.esqueInf.show(panel.panelBajo, "carta1");
 			}
 		}
@@ -90,6 +91,15 @@ public class Controlador implements ActionListener/*, ChangeListener*/{
 			//		panel.panelBajo.remove(0);
 			panel.esqueInf.show(panel.panelBajo, "carta1");
 					JLabel lbl = manejador.detectaColorCierre();
+					panel.panelDetecta.remove(0);
+					panel.panelDetecta.add("Center", lbl);
+					panel.esqueInf.show(panel.panelBajo, "carta2");
+		}
+		
+		else if(i.getText() == "Dilatación"){
+			//		panel.panelBajo.remove(0);
+			panel.esqueInf.show(panel.panelBajo, "carta1");
+					JLabel lbl = manejador.detectaColorDilatacion();
 					panel.panelDetecta.remove(0);
 					panel.panelDetecta.add("Center", lbl);
 					panel.esqueInf.show(panel.panelBajo, "carta2");
