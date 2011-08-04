@@ -75,7 +75,7 @@ public class Colores {
 			//			System.out.println("Color BLANCO");
 			color = 9;
 			enc=true;
-		}else if (((brillo<14)||(saturacion<5)&&(brillo<17))&&!enc){
+		}else if (((brillo<9)||(saturacion<5)&&(brillo<17))&&!enc){
 //			System.out.println("Color NEGRO");
 			color = 11;
 //			System.out.println("AQUI");
