@@ -75,10 +75,10 @@ public class Colores {
 			//			System.out.println("Color BLANCO");
 			color = 9;
 			enc=true;
-		}else if (((brillo<16)||(saturacion<5)&&(brillo<17))&&!enc){
+		}else if (((brillo<14)||(saturacion<5)&&(brillo<17))&&!enc){
 //			System.out.println("Color NEGRO");
 			color = 11;
-			
+//			System.out.println("AQUI");
 			enc=true;
 		}else if (((saturacion<=10 && brillo>30&& brillo<70)||(saturacion<=6 && brillo>30&& brillo<=90)||(saturacion<=20 && brillo<=40)||(saturacion<15 && brillo<44)||(saturacion<10 && brillo<70)||(saturacion<5 && brillo<90)) && !enc){
 //			System.out.println("Color GRIS");
@@ -99,6 +99,10 @@ public class Colores {
 //		//			System.out.println("Color Marron");
 					
 					
+		}else if (((matiz>=305 && matiz<347) || (matiz>350 && saturacion<70) || (matiz<10 && saturacion<70))&&!enc)  {
+//			System.out.println("Color Rosa");
+			color = 8;
+			enc=true;
 		}else if ((matiz<=14.0 || matiz>=347) &&!enc){
 	//			System.out.println("Color ROJO");
 				if(brillo<21) color = 11;
@@ -127,7 +131,7 @@ public class Colores {
 			color = 4;
 			enc=true;
 		
-		}else if (((matiz>=155 && matiz<190 && brillo>22) || (matiz<208 && matiz>168 && saturacion>15 && saturacion<36&& brillo>80))&&!enc){
+		}else if (((matiz>=155 && matiz<190 && brillo>14) || (matiz<208 && matiz>168 && saturacion>15 && saturacion<36&& brillo>80))&&!enc){
 //			System.out.println("Color Celeste");
 			color = 5;
 			enc=true;
@@ -140,10 +144,6 @@ public class Colores {
 //			System.out.println("Color Violeta");
 			color = 7;
 			
-			enc=true;
-		}else if (((matiz>=305 && matiz<347) || (matiz>353 && saturacion<70) || (matiz<7 && saturacion<70))&&!enc)  {
-//			System.out.println("Color Rosa");
-			color = 8;
 			enc=true;
 		}else{
 			color = 11;
