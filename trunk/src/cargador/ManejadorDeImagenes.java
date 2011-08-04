@@ -35,10 +35,13 @@ public class ManejadorDeImagenes {
 	boolean editado = false;  
 	Colores c = new Colores();
 	Sonido s;
-	
+	JFileChooser selector;
+	String currentDirectory;
 	// Constructor de la clase 
 	public ManejadorDeImagenes() {
 		procesador = new ProcesadorDeImagenes();
+		currentDirectory = System.getProperty("user.dir");
+		
 	}
 
 //	@Desc Método que lleva a cabo la carga de un archivo de imagen
@@ -52,7 +55,8 @@ public boolean cargaArchivoDeImagen(JPanel contenedor, PanelDeImagen lienzo){
 		if(resultado==JOptionPane.YES_OPTION)
 			guardaArchivoDeImagen(contenedor);     
 	}
-	JFileChooser selector = new JFileChooser(System.getProperty("user.dir"));
+	
+	selector = new JFileChooser(currentDirectory);
 	selector.addChoosableFileFilter(new FiltroDeArchivo("gif","Archivos Gif"));
 	String lista[] = {"jpeg","jpg"};
 	selector.addChoosableFileFilter(new FiltroDeArchivo(lista,"Archivos JPEG"));
@@ -67,6 +71,8 @@ public boolean cargaArchivoDeImagen(JPanel contenedor, PanelDeImagen lienzo){
 		lienzo.estableceImagen(imagen);   
 		lienzo.repaint();        
 		editado = false;
+		
+		currentDirectory = ruta;//Guarda la ruta del archivo abierto para la próxima vez abrir directamente ese directorio.
 	}else
 		estado = false; 
 	return estado;
