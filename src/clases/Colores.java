@@ -99,7 +99,9 @@ public class Colores {
 //		//			System.out.println("Color Marron");
 					
 					
-		}else if (((matiz>=305 && matiz<347) || (matiz>350 && saturacion<70) || (matiz<10 && saturacion<70))&&!enc)  {
+		}else if (((matiz>=305 && matiz<347) || 
+				(matiz>=347 && matiz<353 && saturacion<82) || (matiz>=353 && matiz<356 && saturacion<77) || (matiz>=356 && saturacion<72) ||
+				(matiz<7 && saturacion<68))&&!enc)  {
 //			System.out.println("Color Rosa");
 			color = 8;
 			enc=true;
