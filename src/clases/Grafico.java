@@ -37,8 +37,8 @@ public class Grafico extends JFrame{
 		esqueGris = new CardLayout();
 		JLabel jl = new JLabel("Pincha sobre la imagen");
 		jl.setHorizontalAlignment(JLabel.CENTER);
-		jl.setFont(new Font("Verdana", Font.BOLD, 17));
-		jl.setForeground(Color.ORANGE);
+		jl.setFont(new Font("Verdana", Font.PLAIN, 17));
+		jl.setForeground(Color.BLACK);
 		getContentPane().add(jl,BorderLayout.NORTH);
 		
 		panelImagenes.setLayout(esqueGris);
