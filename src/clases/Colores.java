@@ -119,7 +119,7 @@ public class Colores {
 				color = 1;
 				if(saturacion>45&&brillo>20&&brillo<40) color=2;
 				enc=true;
-		}else if ((matiz>=41 && matiz<71)&&!enc){
+		}else if ((matiz>=41 && matiz<80)&&!enc){
 //			System.out.println("Color AMARILLO");
 			color = 3;
 			if(matiz>63 && brillo<86) color=4;
@@ -128,12 +128,12 @@ public class Colores {
 		
 		
 			
-		}else if ((matiz>=71 && matiz<155)&&!enc){
+		}else if ((matiz>=80 && matiz<168)&&!enc){
 //			System.out.println("Color Verde");
 			color = 4;
 			enc=true;
 		
-		}else if (((matiz>=155 && matiz<190 && brillo>14) || (matiz<208 && matiz>168 && saturacion>15 && saturacion<36&& brillo>80))&&!enc){
+		}else if (((matiz>=168 && matiz<190 && brillo>14) || (matiz<208 && matiz>168 && saturacion>15 && saturacion<36&& brillo>80))&&!enc){
 //			System.out.println("Color Celeste");
 			color = 5;
 			enc=true;
