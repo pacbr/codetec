@@ -71,7 +71,7 @@ public class Colores {
 		float brillo = v*100;
 		boolean enc = false;
 		
-		if (((saturacion<9 && brillo>97)||(saturacion<6 && brillo>89))&&!enc){
+		if (((saturacion<14 && brillo>95)||(saturacion<10 && brillo>82))&&!enc){
 			//			System.out.println("Color BLANCO");
 			color = 9;
 			enc=true;
@@ -119,7 +119,7 @@ public class Colores {
 				color = 1;
 				if(saturacion>45&&brillo>20&&brillo<40) color=2;
 				enc=true;
-		}else if ((matiz>=41 && matiz<80)&&!enc){
+		}else if ((matiz>=41 && matiz<81)&&!enc){
 //			System.out.println("Color AMARILLO");
 			color = 3;
 			if(matiz>63 && brillo<86) color=4;
@@ -128,16 +128,16 @@ public class Colores {
 		
 		
 			
-		}else if ((matiz>=80 && matiz<168)&&!enc){
+		}else if ((matiz>=81 && matiz<168)&&!enc){
 //			System.out.println("Color Verde");
 			color = 4;
 			enc=true;
 		
-		}else if (((matiz>=168 && matiz<190 && brillo>14) || (matiz<208 && matiz>168 && saturacion>15 && saturacion<36&& brillo>80))&&!enc){
+		}else if (((matiz>=168 && matiz<195 && brillo>14) || (matiz<208 && matiz>168 && saturacion>15 && saturacion<36&& brillo>80))&&!enc){
 //			System.out.println("Color Celeste");
 			color = 5;
 			enc=true;
-		}else if ((matiz>=190 && matiz<262)&&!enc){
+		}else if ((matiz>=195 && matiz<262)&&!enc){
 //			System.out.println("Color Azul");
 			color = 6;
 			if((matiz>240 && saturacion<60)||(matiz>250&&saturacion<70)) color = 7;//violeta
