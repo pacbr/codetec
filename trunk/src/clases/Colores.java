@@ -133,11 +133,11 @@ public class Colores {
 			color = 4;
 			enc=true;
 		
-		}else if (((matiz>=165 && matiz<193 && brillo>14) || (matiz<208 && matiz>168 && saturacion>15 && saturacion<36&& brillo>80))&&!enc){
+		}else if (((matiz>=165 && matiz<190 && brillo>14) || (matiz<208 && matiz>168 && saturacion>15 && saturacion<36&& brillo>80))&&!enc){
 //			System.out.println("Color Celeste");
 			color = 5;
 			enc=true;
-		}else if ((matiz>=193 && matiz<262)&&!enc){
+		}else if ((matiz>=190 && matiz<262)&&!enc){
 //			System.out.println("Color Azul");
 			color = 6;
 			if((matiz>240 && saturacion<60)||(matiz>250&&saturacion<70)) color = 7;//violeta
